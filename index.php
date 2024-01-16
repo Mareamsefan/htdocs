@@ -25,11 +25,14 @@
 	<title>Document</title>
 </head>
 <body>
-	<h1>This is home page</h1>
-	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-		<label for="inputBoks">Skriv noe:</label>
-		<input type="text" id="inputBoks" name="inputBoks">
-		<input type="submit" value="Send">
+	<h1>Signup</h1>
+	<form>
+		<div>
+			<label for="Name">Name</label>
+			<input type="text" id="name" name="name">
+		</div>
+
+		<l
 	</form>
 
 	
