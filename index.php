@@ -1,41 +1,59 @@
-<?php
-
-/*
-	if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
-		$uri = 'https://';
-	} else {
-		$uri = 'http://';
-	}
-	$uri .= $_SERVER['HTTP_HOST'];
-	header('Location: '.$uri.'/dashboard/');
-	exit;
-	*/
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$inputVerdi = $_POST["inputBoks"]; 
-	echo "Du skrev: " .$inputVerdi;
-}	
-
-?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nb">
+<!-- Meta information-->
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+    <!-- Default Meta information -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- removes all 'default' formatting on the page -->
+    <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <!-- Link to your own stylesheet -->
+    <link rel="stylesheet" type="text/css" href="style/index.css">
+    <!-- Website Title -->
+    <title>Savnac</title>
+    <!-- Website Icon -->
+    <link rel="icon" href="#">
 </head>
+
+<!-- Everything shown on the page-->
 <body>
-	<h1>Signup</h1>
-	<form>
-		<div>
-			<label for="Name">Name</label>
-			<input type="text" id="name" name="name">
-		</div>
+<!-- Header -->
+<header>
 
-		<l
-	</form>
+</header>
 
-	
-	
+<!-- Main -->
+<main>
+    <div id="student">
+        <h2>Student</h2>
+        <ul>
+            <li><a href="#">Registrer som Student</a></li>
+            <li><a href="#">Log in som Student</a></li>
+        </ul>
+    </div>
+
+    <div id="lecturer">
+        <h2>Foreleser</h2>
+        <ul>
+            <li><a href="#">Registrer som Foreleser</a></li>
+            <li><a href="#">Log in som Lecturer</a></li>
+        </ul>
+    </div>
+
+
+    <div id="pinForm">
+        <form>
+            <label for="subjectPIN">Har du allerede :</label>
+            <input type="number" id="subjectPIN">
+        </form>
+    </div>
+
+</main>
+
+<!-- Footer -->
+<footer>
+
+</footer>
 </body>
 </html>
