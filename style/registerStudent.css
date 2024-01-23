@@ -1,0 +1,21 @@
+body{
+    background-color: rgb(170, 174, 201);
+    display: flex;
+    justify-content: center;
+}
+
+#register{
+    padding: 1rem;
+    background-color: beige;
+    border: black ;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+}
+#submit{
+    margin: 1rem;
+    padding: 0.5rem;
+}
+h2{
+    text-align-last: center;
+}
