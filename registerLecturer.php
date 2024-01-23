@@ -16,12 +16,10 @@ $database = "sanvac_1";
  $FirstName = $_POST["FirstName"];
  $LastName = $_POST["LastName"];
  $Email = $_POST["Email"];
- $StudyProgram = $_POST["StudyProgram"];
- $Class = $_POST["Class"];
  $Password = $_POST["Password"];
 
 
- $sql = "INSERT INTO Student (FirstName, LastName, Email, StudyProgram, Class, Password) VALUES('$FirstName', '$LastName', '$Email', '$StudyProgram', '$Class','$Password')";
+ $sql = "INSERT INTO Lecturer(FirstName, LastName, Email, Password) VALUES('$FirstName', '$LastName', '$Email','$Password')";
   if ($conn->query($sql) === TRUE) {
         echo "Data lagt til i databasen!";
     } else {
