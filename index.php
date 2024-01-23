@@ -1,70 +1,59 @@
-<?php
-// Login informasjon
-$servername = "localhost";
-$username = "MrRobot";
-$password = "17%PepsiMaxDrikker";
-$database = "mydb";
-
-// Check for errors after connection attempt
-$conn = mysqli_connect($servername, $username, $password, $database);
-
-// Check for connection errors
-if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-}
-
-echo "Connected successfully";
-
-if ($_SERVER["REQUEST_METHOD"]== "POST"){
-	$FirstName = $_POST["FirstName"];
-	$LastName = $_POST["LastName"];
-	$Email = $_POST["Email"];
-	$StudyProgram = $_POST["StudyProgram"];
-	$Class = $_POST["Class"];
-	$Password = $_POST["Password"];
-}
-/*
-$sql = "INSERT INTO Student (FirstName, LastName, Email, StudyProgram, Class, Password) VALUES('$FirstName', '$LastName', '$Email', '$StudyProgram', '$Class','$Password')";
-if ($conn->query($sql) === TRUE) {
-echo "Data lagt til i databasen!";
-} else {
-echo "Feil: " . $sql . "<br>" . $conn->error;
-}
-*/
-
-
-?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nb">
+<!-- Meta information-->
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+    <!-- Default Meta information -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- removes all 'default' formatting on the page -->
+    <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <!-- Link to your own stylesheet -->
+    <link rel="stylesheet" type="text/css" href="style/index.css">
+    <!-- Website Title -->
+    <title>Savnac</title>
+    <!-- Website Icon -->
+    <link rel="icon" href="#">
 </head>
-<body>
-	<h1>This is home page</h1>
 
-	<form action="mari.php" method="post">
-        <label for="FirstName">Fornavn:</label>
-        <input type="text" id="FirstName" name="FirstName" required>
-        <br>
-        <label for="LastName">Etternavn:</label>
-        <input type="text" id="LastName" name="LastName" required>
-        <br>
-        <label for="Email">E-post:</label>
-        <input type="email" id="Email" name="Email" required>
-        <br>
-        <label for="StudyProgram">Studieprogram:</label>
-        <input type="text" id="StudyProgram" name="StudyProgram" required>
-        <br>
-        <label for="Class">Klasse:</label>
-        <input type="text" id="Class" name="Class" required>
-        <br>
-        <label for="Password">Passord:</label>
-        <input type="password" id="Password" name="Password" required>
-        <br>
-        <input type="submit" value="Legg til student">
-    </form>
+<!-- Everything shown on the page-->
+<body>
+<!-- Header -->
+<header>
+
+</header>
+
+<!-- Main -->
+<main>
+    <div id="student">
+        <h2>Student</h2>
+        <ul>
+            <li><a href="#">Registrer som Student</a></li>
+            <li><a href="#">Log in som Student</a></li>
+        </ul>
+    </div>
+
+    <div id="lecturer">
+        <h2>Foreleser</h2>
+        <ul>
+            <li><a href="#">Registrer som Foreleser</a></li>
+            <li><a href="#">Log in som Lecturer</a></li>
+        </ul>
+    </div>
+
+
+    <div id="pinForm">
+        <form>
+            <label for="subjectPIN">Har du allerede :</label>
+            <input type="number" id="subjectPIN">
+        </form>
+    </div>
+
+</main>
+
+<!-- Footer -->
+<footer>
+
+</footer>
 </body>
 </html>
