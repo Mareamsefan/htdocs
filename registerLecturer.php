@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "MrRobot";
 $password = "17%PepsiMaxDrikker";
-$database = "sanvac_1";
+$database = "mydb";
 
 // Check for errors after connection attempt
  $conn = mysqli_connect($servername, $username, $password, $database);
@@ -22,6 +22,7 @@ $database = "sanvac_1";
  $sql = "INSERT INTO Lecturer(FirstName, LastName, Email, Password) VALUES('$FirstName', '$LastName', '$Email','$Password')";
   if ($conn->query($sql) === TRUE) {
         echo "Data lagt til i databasen!";
+        header("/lecturerDashboard.html")
     } else {
         echo "Feil: " . $sql . "<br>" . $conn->error;
     }
