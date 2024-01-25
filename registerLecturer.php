@@ -22,7 +22,7 @@ $database = "mydb";
  $sql = "INSERT INTO Lecturer(FirstName, LastName, Email, Password) VALUES('$FirstName', '$LastName', '$Email','$Password')";
   if ($conn->query($sql) === TRUE) {
         echo "Data lagt til i databasen!";
-        header("/lecturerDashboard.html")
+        header("/lecturerDashboard.html");
     } else {
         echo "Feil: " . $sql . "<br>" . $conn->error;
     }

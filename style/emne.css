@@ -1,0 +1,44 @@
+.header {
+
+    border-radius: 10px;
+}
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    min-height: 100vh;
+    display: grid;
+    gap: 1rem;
+}
+.content {
+    display: grid;
+    gap: 1rem;
+}
+.filler {
+    border-bottom: 1px solid;
+}
+.content-header {
+    background-color: rgb(252, 247, 247);
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.lecturer {
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+}
+.picture {
+    background: red;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+}
+.facts {
+      background-color: rgb(252, 247, 247);
+      border-radius: 10px;
+}
