@@ -1,0 +1,14 @@
+:root {
+    --shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+    --shadow-bg:  #f5f5dc;
+}
+.shadow {
+   box-shadow: var(--shadow);
+}
+.bg {
+       background-color: var(--shadow-bg);
+}
+.container {
+    max-width: 90vw;
+    margin: 0 auto;
+}
