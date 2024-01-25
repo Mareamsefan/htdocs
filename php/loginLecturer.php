@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "MrRobot";
 $password = "17%PepsiMaxDrikker";
-$database = "mydb";
+$database = "sanvac_1";
 
 // Check for errors after connection attempt
 $conn = mysqli_connect($servername, $username, $password, $database);
@@ -40,5 +40,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 // Close the connection
 $conn->close();
-?>
 
+?>
