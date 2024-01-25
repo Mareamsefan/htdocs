@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style/registerStudent.css">
+    <link rel="stylesheet" type="text/css" href="/style/registerStudent.css">
     <title>Datainnsending</title>
 </head>
 <body>
@@ -11,8 +11,8 @@
 
     </header>
     <main>
-        <h2>Legg til student</h2>
-        <form id="register" action="php/registerStudent.php" method="post">
+        <h2>Legg til lektor</h2>
+        <form id="register" action="../php/registerLecturer.php" method="post">
 
             <label for="FirstName">Fornavn:</label>
             <input type="text" id="FirstName" name="FirstName" required>
@@ -23,16 +23,10 @@
             <label for="Email">E-post:</label>
             <input type="email" id="Email" name="Email" required>
 
-            <label for="StudyProgram">Studieprogram:</label>
-            <input type="text" id="StudyProgram" name="StudyProgram" required>
-
-            <label for="Class">Klasse:</label>
-            <input type="text" id="Class" name="Class" required>
-
             <label for="Password">Passord:</label>
             <input type="password" id="Password" name="Password" required>
             
-            <input id= "submit" type="submit" value="Legg til student">
+            <input id= "submit" type="submit" value="Legg til foreleser">
         </form>
     </main>
 </body>
