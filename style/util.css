@@ -8,3 +8,7 @@
 .bg {
        background-color: var(--shadow-bg);
 }
+.container {
+    max-width: 90vw;
+    margin: 0 auto;
+}
