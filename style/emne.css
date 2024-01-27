@@ -1,44 +1,109 @@
 .header {
-
-    border-radius: 10px;
+  border-radius: 10px;
 }
 nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 main {
-    min-height: 100vh;
-    display: grid;
-    gap: 1rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 .content {
-    display: grid;
-    gap: 1rem;
 }
-.filler {
-    border-bottom: 1px solid;
+.content::after {
+  content: ""; /* Create a pseudo-element for the border */
+  display: block;
+  border-bottom: 1px solid;
+  /* Move the border line up by 1rem to offset the margin-bottom */
 }
 .content-header {
-    background-color: rgb(252, 247, 247);
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
+  background-color: rgb(252, 247, 247);
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
 }
 
 .lecturer {
-    display: flex;
-    flex-direction: column;
-    gap: .2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }
 .picture {
-    background: red;
-    width: 8rem;
-    height: 8rem;
-    border-radius: 50%;
+  background: red;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
 }
 .facts {
-      background-color: rgb(252, 247, 247);
-      border-radius: 10px;
+  background-color: rgb(252, 247, 247);
+  border-radius: 10px;
+}
+.comment-area {
+  display: flex;
+  flex-direction: column;
+}
+.comment {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.comment input {
+  height: 8rem;
+  width: 75vw;
+}
+.img {
+  background: red;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+}
+.mening {
+  align-self: center;
+}
+.comments-section {
+  margin-top: 1rem;
+}
+.img2 {
+  background: red;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+}
+.comment-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.submit-btn {
+  align-self: center;
+}
+
+.comment-record {
+  display: flex;
+  gap: 1rem;
+}
+.submit {
+  cursor: pointer;
+  padding: 5px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  vertical-align: middle;
+  border: 1px solid;
+  border-radius: 6px;
+  color: white;
+  background-color: #314150;
+  border-color: #1b1f2326;
+  box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px 0px,
+    rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;
+  transition: 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  transition-property: color, background-color, border-color;
+}
+.submit:active {
+  scale: 0.9;
 }
