@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($count_exists == 1) {
             echo "Du er nå logget inn!";
             //When redirecting, you can choose what data to send in url parameter
-             header("Location: /html/lecturerDashboard.php?email=$Email");
+             header("Location: /html/lecturerDashboard.php?email=$Email&password=$Password");
         } else {
             echo "Feil, sjekk at passord og e-post er riktig.";
         }
