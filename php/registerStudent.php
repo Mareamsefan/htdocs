@@ -21,7 +21,10 @@ $database = "sanvac_1";
  $Password = $_POST["Password"];
 
 
- $sql = "INSERT INTO Student (FirstName, LastName, Email, StudyProgram, Class, Password) VALUES('$FirstName', '$LastName', '$Email', '$StudyProgram', '$Class','$Password')";
+// Specify the columns in the INSERT statement
+$sql = "INSERT INTO Student (FirstName, LastName, Email, StudyProgram, Class, Password) 
+        VALUES ('$FirstName', '$LastName', '$Email', '$StudyProgram', '$Class', '$Password')";
+
   if ($conn->query($sql) === TRUE) {
         echo "Data lagt til i databasen!";
     } else {
