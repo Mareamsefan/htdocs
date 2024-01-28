@@ -56,6 +56,10 @@ main {
   height: 8rem;
   width: 75vw;
 }
+.comment2 input {
+  height: 4rem;
+  width: 73vw;
+}
 .img {
   background: red;
   width: 8rem;
@@ -106,4 +110,8 @@ main {
 }
 .submit:active {
   scale: 0.9;
+}
+
+#reply-form {
+  display: hidden;
 }
