@@ -12,19 +12,19 @@
     </header>
     <main>
         <h2>Legg til et emne</h2>
-        <form id="register" action="../php/registerSubject.php" method="post">
+    <form id="register" action="../php/registerSubject.php" method="post">
+    <label for="SubjectCode">Emnekode:</label>
+    <input type="text" id="SubjectCode" name="SubjectCode" required>
 
-            <label for="SubjectCode">Emnekode:</label>
-            <input type="text" id="SubjectCode" name="" required>
+    <label for="SubjectName">Emnenavn:</label>
+    <input type="text" id="SubjectName" name="SubjectName" required>
 
-            <label for="SubjectName">Emnenavn:</label>
-            <input type="text" id="SubjectName" name="SubjectName" required>
+    <label for="SubjectPIN">PIN:</label>
+    <input type="text" id="SubjectPIN" name="SubjectPIN" required>
 
-            <label for="SubjectPIN">PIN</label>
-            <input type="text" id="SubjectPIN" name="SubjectPIN" required>
+    <input id="submit" type="submit" value="Legg til emne">
+</form>
 
-            <input id= "submit" type="submit" value="Legg til foreleser">
-        </form>
     </main>
 </body>
 </html>

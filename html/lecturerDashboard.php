@@ -26,10 +26,14 @@
                 </ul>
             </nav>
         </header>
+     
         <main class="shadow">
             <header class="main-header">
                 <h2 class="title">Emner</h2>
             </header>
+            <section class="add">
+            <button><a href="/html/registerSubject.html">Legg til emne</a></button>
+        </section>
             <section class="subjects">
                 <article class="subject">
                     <header class="subject-header">
