@@ -17,11 +17,12 @@ echo "Connected successfully";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Email = $_POST["Email"];
     $Password = $_POST["Password"];
+    $RememberMe = isset($_POST["RememberMe"]); 
 
-    // Use single quotes around string values in the SQL query
-    $sql = "SELECT COUNT(*) AS count_exists FROM Student WHERE Email = '$Email' AND Password = '$Password'";
 
-    // Execute the query and fetch the result
+    $sql = "SELECT COUNT(*) AS count_exists, ID FROM Student WHERE Email = '$Email' AND Password = '$Password' GROUP BY ID";
+
+  
     $result = $conn->query($sql);
 
     if ($result) {
@@ -30,7 +31,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($count_exists == 1) {
             echo "Du er nå logget inn!";
-            header("Location: /index.html");
+
+            $token = uniqid(); 
+            if ($RememberMe){
+                setcookie("remember_token", $token, time() + 3600*24*7); 
+            }
+            $userId = $row['ID']; 
+            $sql = "UPDATE Student SET remember_token = '$token' WHERE ID = $userId"; 
+            mysqli_query($conn, $sql); 
+
+            $_SESSION['user_id'] = $userId;
+            header("Location: /html/studentDashboard.html?&id=$userId");
+            
+            exit();
+              $lecturerID = $row['ID'];
         } else {
             echo "Feil, sjekk at passord og e-post er riktig.";
         }
