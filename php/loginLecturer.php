@@ -31,8 +31,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //NB! ***************************Important info here**************************
         if ($count_exists == 1) {
             echo "Du er nå logget inn!";
+              $lecturerID = $row['ID'];
             //When redirecting, you can choose what data to send in url parameter
-             header("Location: /html/lecturerDashboard.php?email=$Email");
+             header("Location: /html/lecturerDashboard.php?email=$Email&password=$Password&id=$lecturerID");
         } else {
             echo "Feil, sjekk at passord og e-post er riktig.";
         }
