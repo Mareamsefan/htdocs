@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/style/registerStudent.css">
+    <title>Registrer emne</title>
+</head>
+<body>
+    <header>
+
+    </header>
+    <main>
+        <h2>Legg til et emne</h2>
+    <form id="register" action="../php/registerSubject.php" method="post">
+    <label for="SubjectCode">Emnekode:</label>
+    <input type="text" id="SubjectCode" name="SubjectCode" required>
+
+    <label for="SubjectName">Emnenavn:</label>
+    <input type="text" id="SubjectName" name="SubjectName" required>
+
+    <label for="SubjectPIN">PIN:</label>
+    <input type="text" id="SubjectPIN" name="SubjectPIN" required>
+
+    <input id="submit" type="submit" value="Legg til emne">
+</form>
+
+    </main>
+</body>
+</html>

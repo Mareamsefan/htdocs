@@ -12,8 +12,6 @@ main {
     flex-direction: column;
 }
 
-main {}
-
 .main-header {
     align-self: center;
 }
@@ -70,7 +68,7 @@ button a {
     color: white;
 }
 button:hover{
-         background-color: #64718d;
-        border-color: #47576826;
-        transition-duration: 0.1s;
+    background-color: #64718d;
+    border-color: #47576826;
+    transition-duration: 0.1s;
 }

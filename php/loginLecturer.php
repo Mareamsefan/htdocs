@@ -31,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $result->fetch_assoc();
         $count_exists = $row['count_exists'];
 
+        //NB! ***************************Important info here**************************
         if ($count_exists == 1) {
             echo "Du er nå logget inn!";
             $token = uniqid(); 
@@ -45,6 +46,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             header("Location: /index.html");
             exit();
+              $lecturerID = $row['ID'];
+            //When redirecting, you can choose what data to send in url parameter
+             header("Location: /html/lecturerDashboard.php?email=$Email&password=$Password&id=$lecturerID");
         } else {
             echo "Feil, sjekk at passord og e-post er riktig.";
         }

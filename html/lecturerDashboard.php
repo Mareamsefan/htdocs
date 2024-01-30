@@ -15,16 +15,25 @@
 
         <header class="header shadow bg">
             <nav>
-                <h1>Dashboard til "lærernavn"</h1>
+                <?php
+                // Retrieve lecturer's email from the query parameter
+                $lecturer_email = $_GET['email'];
+                $password = $_GET["password"];
+                echo "<h1>Dashboard til \"$lecturer_email - $password\"</h1>";
+                ?>
                 <ul>
                     <li><a href="../index.html">Hjem</a></li>
                 </ul>
             </nav>
         </header>
+     
         <main class="shadow">
             <header class="main-header">
                 <h2 class="title">Emner</h2>
             </header>
+            <section class="add">
+            <button><a href="/html/registerSubject.html">Legg til emne</a></button>
+        </section>
             <section class="subjects">
                 <article class="subject">
                     <header class="subject-header">
