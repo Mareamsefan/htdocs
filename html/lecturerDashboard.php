@@ -17,19 +17,25 @@
             <nav>
                 <?php
                 session_start();
-                $mysqli = require __DIR__ . "/../php/database.php";
-                if(isset($_SESSION['user_id'])){
-                    $user_id = $_SESSION['user_id']; 
+                // Check if user ID is set in the session
+                if (isset($_SESSION['user_id'])) {
+                    // Retrieve user ID
+                    $userId = $_SESSION['user_id'];
+                    // echo "User ID: " . $userId;
+                } else {
+                    echo "User ID not found in session.";
                 }
-                
-                $sql = "SELECT * FROM Lecturer
-                        WHERE ID = $user_id"; 
+
+                // testing
+                $mysqli = require __DIR__ . "/../php/database.php";
+                $sql = "SELECT FirstName, LastName FROM Lecturer WHERE ID = '$userId'";
                 $result = $mysqli->query($sql);
                 $row = $result->fetch_assoc();
-                $FirstName = $row['FirstName'];
-                $LastName = $row['LastName'];
-                echo "<h1>Dashboard til $FirstName - $LastName</h1>";
-            
+                $LecturerFirstName = $row['FirstName'];
+                $LecturerLastName = $row['LastName'];
+
+                echo "<h1>Dashboard til '$LecturerFirstName - $LecturerLastName'</h1>";
+               
                 ?>
                 <ul>
                     <li><a href="../index.html">Hjem</a></li>
