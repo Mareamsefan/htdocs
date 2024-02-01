@@ -1,6 +1,5 @@
 <?php
 
-
 function generatePassword($length = 8) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $password = '';
@@ -19,14 +18,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $newPassword = generatePassword();
 
-    $sql = "UPDATE users SET password = :password WHERE email = :email";
+    $sql = "UPDATE student SET Password = :password WHERE Email = :Email";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['password' => $newPassword, 'email' => $email]);
+    $stmt->execute(['password' => $newPassword, 'Email' => $email]);
 
     $to = $email;
     $subject = "Your new password";
     $message = "Your new password is: $newPassword";
-    $headers = "From: "thisaintspam@totallysafe.crazy";
+    $headers = "From: thisaintspam@totallysafe.crazy";
     if (mail($to, $subject, $message, $headers)) {
         echo "New password generated and sent to your email.";
     } else {

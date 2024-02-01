@@ -25,9 +25,12 @@ $mysqli = require __DIR__ . "/database.php";
      $sql = "INSERT INTO lecturer_has_subject(Lecturer_ID, Subject_SubjectCode) VALUES('$LecturerID', '$SubjectCode')";
      if ($mysqli->query($sql) === TRUE) {
          echo "Data lagt til i databasen!";
-         header("/lecturerDashboard.html");
+         header("Location: /html/lecturerDashboard.php");
      } else {
          echo "Feil: " . $sql . "<br>" . $mysqli->error;
      }
+
 }
+
+
 ?>
