@@ -1,30 +1,33 @@
 <?php
-$servername = "localhost";
-$username = "MrRobot";
-$password = "17%PepsiMaxDrikker";
-$database = "sanvac_1";
+$mysqli = require __DIR__ . "/database.php";
 
-// Check for errors after connection attempt
- $conn = mysqli_connect($servername, $username, $password, $database);
-// // Check for connection errors
- if (!$conn) {
-      die("Connection failed: " . mysqli_connect_error());
-   }
-
-  echo "Connected successfully";
- if ($_SERVER["REQUEST_METHOD"]== "POST"){
- $FirstName = $_POST["FirstName"];
- $LastName = $_POST["LastName"];
- $Email = $_POST["Email"];
- $Password = $_POST["Password"];
+ if ($_SERVER["REQUEST_METHOD"]== "POST") {
+     $FirstName = $_POST["FirstName"];
+     $LastName = $_POST["LastName"];
+     $Email = $_POST["Email"];
+     $Password = $_POST["Password"];
+     $SubjectCode = $_POST["SubjectCode"];
+     $SubjectName = $_POST["SubjectName"];
+     $SubjectPIN = $_POST["SubjectPIN"];
 
 
- $sql = "INSERT INTO Lecturer(FirstName, LastName, Email, Password) VALUES('$FirstName', '$LastName', '$Email','$Password')";
-  if ($conn->query($sql) === TRUE) {
-        echo "Data lagt til i databasen!";
-        header("/lecturerDashboard.html");
-    } else {
-        echo "Feil: " . $sql . "<br>" . $conn->error;
-    }
- }
+     $sql = "INSERT INTO Lecturer(FirstName, LastName, Email, Password) VALUES('$FirstName', '$LastName', '$Email','$Password')";
+     $mysqli->query($sql);
+     // 1. Opprett subject
+     $sql = "INSERT INTO subject(SubjectCode, SubjectName, SubjectPIN) VALUES('$SubjectCode', '$SubjectName', '$SubjectPIN')";
+     $mysqli->query($sql);
+     // 2. Hent lecturer ID fra database
+     $sql = "SELECT id FROM Lecturer WHERE FirstName = '$FirstName' AND LastName = '$LastName' AND Email = '$Email'";
+     $result = $mysqli->query($sql);
+     $row = $result->fetch_assoc();
+     $LecturerID = $row['id'];
+     // 3. Opprett lecturer_has_subject
+     $sql = "INSERT INTO lecturer_has_subject(Lecturer_ID, Subject_SubjectCode) VALUES('$LecturerID', '$SubjectCode')";
+     if ($mysqli->query($sql) === TRUE) {
+         echo "Data lagt til i databasen!";
+         header("/lecturerDashboard.html");
+     } else {
+         echo "Feil: " . $sql . "<br>" . $mysqli->error;
+     }
+}
 ?>
