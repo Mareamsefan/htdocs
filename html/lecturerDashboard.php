@@ -16,10 +16,20 @@
         <header class="header shadow bg">
             <nav>
                 <?php
-                // Retrieve lecturer's email from the query parameter
-                $lecturer_email = $_GET['email'];
-                $password = $_GET["password"];
-                echo "<h1>Dashboard til \"$lecturer_email - $password\"</h1>";
+                session_start();
+                $mysqli = require __DIR__ . "/../php/database.php";
+                if(isset($_SESSION['user_id'])){
+                    $user_id = $_SESSION['user_id']; 
+                }
+                
+                $sql = "SELECT * FROM Lecturer
+                        WHERE ID = $user_id"; 
+                $result = $mysqli->query($sql);
+                $row = $result->fetch_assoc();
+                $FirstName = $row['FirstName'];
+                $LastName = $row['LastName'];
+                echo "<h1>Dashboard til $FirstName - $LastName</h1>";
+            
                 ?>
                 <ul>
                     <li><a href="../index.html">Hjem</a></li>
