@@ -16,10 +16,25 @@
         <header class="header shadow bg">
             <nav>
                 <?php
-                // Retrieve lecturer's email from the query parameter
-                $lecturer_email = $_GET['email'];
-                $password = $_GET["password"];
-                echo "<h1>Dashboard til \"$lecturer_email - $password\"</h1>";
+                session_start();
+                // Check if user ID is set in the session
+                if (isset($_SESSION['user_id'])) {
+                    // Retrieve user ID
+                    $userId = $_SESSION['user_id'];
+                    // echo "User ID: " . $userId;
+                } else {
+                    echo "User ID not found in session.";
+                }
+
+                // testing
+                $mysqli = require __DIR__ . "/../php/database.php";
+                $sql = "SELECT FirstName, LastName FROM Lecturer WHERE ID = '$userId'";
+                $result = $mysqli->query($sql);
+                $row = $result->fetch_assoc();
+                $LecturerFirstName = $row['FirstName'];
+                $LecturerLastName = $row['LastName'];
+
+                echo "<h1>Dashboard til '$LecturerFirstName - $LecturerLastName'</h1>";
                 ?>
                 <ul>
                     <li><a href="../index.html">Hjem</a></li>

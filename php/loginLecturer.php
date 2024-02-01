@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $_SESSION['user_id'] = $userId;
 
-            header("Location: /html/lecturerDashboard.html?email=$Email&password=$Password&id=$userId");
+            header("Location: /html/lecturerDashboard.php?email=$Email&password=$Password&id=$userId");
             
         } else {
             echo "Feil, sjekk at passord og e-post er riktig.";
