@@ -1,18 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "MrRobot";
-$password = "17%PepsiMaxDrikker";
-$database = "sanvac_1";
-
-// Check for errors after connection attempt
-$conn = mysqli_connect($servername, $username, $password, $database);
-
-// Check for connection errors
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-echo "Connected successfully";
+$mysqli = require __DIR__ . "/database.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Email = $_POST["Email"];
@@ -23,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "SELECT COUNT(*) AS count_exists, ID FROM Student WHERE Email = '$Email' AND Password = '$Password' GROUP BY ID";
 
   
-    $result = $conn->query($sql);
+    $result = $mysqli->query($sql);
 
     if ($result) {
         $row = $result->fetch_assoc();
@@ -38,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             $userId = $row['ID']; 
             $sql = "UPDATE Student SET remember_token = '$token' WHERE ID = $userId"; 
-            mysqli_query($conn, $sql); 
+            mysqli_query($mysqli, $sql); 
 
             $_SESSION['user_id'] = $userId;
             header("Location: /html/studentDashboard.html?&id=$userId");
@@ -49,10 +36,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Feil, sjekk at passord og e-post er riktig.";
         }
     } else {
-        echo "Feil i SQL-uttalelse: " . $conn->error;
+        echo "Feil i SQL-uttalelse: " . $mysqli->error;
     }
 }
 // Close the connection
-$conn->close();
+$mysqli->close();
 ?>
 
