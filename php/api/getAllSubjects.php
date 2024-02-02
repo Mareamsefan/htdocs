@@ -17,9 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     //change "LEFT JOIN" to "INNER JOIN" when there is actual link between lecturer and teacher tables. 
     $sql = "SELECT sb.SubjectCode, sb.SubjectName, sb.SubjectPIN, lec.FirstName, lec.LastName FROM
 subject AS sb
-LEFT JOIN lecturer_has_subject AS lhs 
+INNER JOIN lecturer_has_subject AS lhs 
 ON lhs.Subject_SubjectCode = sb.SubjectCode
-LEFT JOIN lecturer AS lec
+INNER JOIN lecturer AS lec
 ON lec.ID = lhs.Lecturer_ID";
     
     $result = $conn->query($sql);

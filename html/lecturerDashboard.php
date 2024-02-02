@@ -34,49 +34,49 @@
                 $LecturerFirstName = $row['FirstName'];
                 $LecturerLastName = $row['LastName'];
 
-                echo "<h1>Dashboard til '$LecturerFirstName - $LecturerLastName'</h1>";
+                echo "<h1>Dashboard til $LecturerFirstName $LecturerLastName</h1>";
                 ?>
                 <ul>
                     <li><a href="../index.html">Hjem</a></li>
                 </ul>
             </nav>
         </header>
-     
+
         <main class="shadow">
             <header class="main-header">
                 <h2 class="title">Emner</h2>
             </header>
             <section class="add">
-            <button><a href="/html/registerSubject.html">Legg til emne</a></button>
-        </section>
+                <button><a href="/html/registerSubject.html">Legg til emne</a></button>
+            </section>
             <section class="subjects">
-                <article class="subject">
-                    <header class="subject-header">
-                        <h3>Emne 1 Navn</h3>
-                    </header>
-                    <button><a href="#">Besøk emneside</a></button>
-                </article>
+                <?php
 
-                <article class="subject">
-                    <header class="subject-header">
-                        <h3>Emne 2 Navn</h3>
-                    </header>
+                // SQL for å finne alle subjects til innlogget lecturer :)
+                // Hentet for det meste kode fra chatGPT for denne. Se log under.
+                // https://chat.openai.com/share/d8d4c359-b56e-4983-acac-acd2e754765f
+                $sql = "SELECT DISTINCT s.* 
+                FROM subject AS s
+                INNER JOIN lecturer_has_subject AS lhs ON s.SubjectCode = lhs.Subject_SubjectCode
+                INNER JOIN lecturer AS l ON lhs.Lecturer_ID = l.ID
+                WHERE l.ID = $userId";
+                $result = $mysqli->query($sql);
 
-                    <button><a href="#">Besøk emneside</a></button>
-
-                </article>
-                <article class="subject">
-                    <header class="subject-header">
-                        <h3>Emne 3 Navn</h3>
-                    </header>
-                    <button><a href="#">Besøk emneside</a></button>
-                </article>
-                <article class="subject">
-                    <header class="subject-header">
-                        <h3>Emne 4 Navn</h3>
-                    </header>
-                    <button><a href="#">Besøk emneside</a></button>
-                </article>
+                // Check if subjects are retrieved
+                if ($result->num_rows > 0) {
+                    // Output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<article class='subject'>";
+                        echo "<header class='subject-header'>";
+                        echo "<h3>" . $row['SubjectName'] . "</h3>";
+                        echo "</header>";
+                        echo "<button><a href='#'>Besøk emneside</a></button>";
+                        echo "</article>";
+                    }
+                } else {
+                    echo "Ingen emner funnet.";
+                }
+                ?>
             </section>
         </main>
     </div>
