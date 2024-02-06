@@ -37,7 +37,7 @@
                 echo "<h1>Dashboard til $LecturerFirstName $LecturerLastName</h1>";
                 ?>
                 <ul>
-                    <li><a href="../index.html">Hjem</a></li>
+                    <li><a href="../../index.html">Hjem</a></li>
                 </ul>
             </nav>
         </header>
