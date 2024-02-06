@@ -70,7 +70,7 @@
                         echo "<header class='subject-header'>";
                         echo "<h3>" . $row['SubjectName'] . "</h3>";
                         echo "</header>";
-                        echo "<button><a href='#'>Besøk emneside</a></button>";
+                        echo "<button><a href='../../html/emnePage.php/?subject_pin={$row['SubjectPIN']}'>Besøk emneside</a></button>";
                         echo "</article>";
                     }
                 } else {
