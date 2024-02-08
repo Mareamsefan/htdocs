@@ -14,21 +14,49 @@
   <div class="container">
     <header class="header shadow bg">
       <nav>
-        <h1>Emne navn</h1>
+          <?php
+          $mysqli = require __DIR__ . "/../php/database.php";
+          $subject_pin = $_GET['subject_pin'] ?? '';
+          $sql = "SELECT SubjectName FROM subject WHERE SubjectPIN = '$subject_pin'";
+          $result = $mysqli->query($sql);
+          $row = $result->fetch_assoc();
+          echo "<h1>" . $row['SubjectName'] . "</h1>";
+          $mysqli->close();
+          ?>
         <ul>
-          <li><a href="index.html">Hjem</a></li>
+          <li><a href="../index.html">Hjem</a></li>
         </ul>
       </nav>
     </header>
     <main class="shadow">
       <section class="content">
         <header class="content-header">
-          <h2>Emne tittle og navn</h2>
+            <?php
+            $mysqli = require __DIR__ . "/../php/database.php";
+            $subject_pin = $_GET['subject_pin'] ?? '';
+            $sql = "SELECT SubjectName FROM subject WHERE SubjectPIN = '$subject_pin'";
+            $result = $mysqli->query($sql);
+            $row = $result->fetch_assoc();
+            echo "<h2>" . $row['SubjectName'] . "</h2>";
+            $mysqli->close();
+            ?>
           <div class="lecturer">
             <div class="picture"></div>
             <div>
-              <p>Navn på lærer</p>
-              <p>Rolle: første lektor</p>
+                <?php
+                $mysqli = require __DIR__ . "/../php/database.php";
+                $subject_pin = $_GET['subject_pin'] ?? '';
+                $sql = <<<SQL
+                    SELECT FirstName, LastName
+                    FROM lecturer as l, lecturer_has_subject as lhs, subject as s
+                    WHERE s.SubjectPIN = lhs.Subject_SubjectCode
+                    AND lhs.Lecturer_ID = l.ID
+                    SQL;
+                $result = $mysqli->query($sql);
+                $row = $result->fetch_assoc();
+                echo "<p>" . $row['FirstName'] . " " . $row['LastName'] . "</p>";
+                $mysqli->close();
+                ?>
             </div>
           </div>
         </header>
@@ -37,9 +65,17 @@
             <h3>Fakta om emne</h3>
           </header>
           <div>
-            <p>Emne kode</p>
-            <p>Emne navn</p>
-            <p>Emne PIN</p>
+              <?php
+              $mysqli = require __DIR__ . "/../php/database.php";
+              $subject_pin = $_GET['subject_pin'] ?? '';
+              $sql = "SELECT SubjectCode, SubjectName, SubjectPIN FROM subject WHERE SubjectPIN = '$subject_pin'";
+              $result = $mysqli->query($sql);
+              $row = $result->fetch_assoc();
+              echo "<p>" . "Emne Kode:" . $row['SubjectCode'] . "</p>";
+              echo "<p>" . "Emne Navn:" . $row['SubjectName'] . "</p>";
+              echo "<p>" . "Emne PIN: " . $row['SubjectPIN'] . "</p>";
+              $mysqli->close();
+              ?>
           </div>
         </article>
       </section>
