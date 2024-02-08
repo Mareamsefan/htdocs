@@ -33,7 +33,6 @@
                 $row = $result->fetch_assoc();
                 $LecturerFirstName = $row['FirstName'];
                 $LecturerLastName = $row['LastName'];
-
                 echo "<h1>Dashboard til $LecturerFirstName $LecturerLastName</h1>";
                 ?>
                 <ul>
@@ -61,6 +60,7 @@
                 INNER JOIN lecturer AS l ON lhs.Lecturer_ID = l.ID
                 WHERE l.ID = $userId";
                 $result = $mysqli->query($sql);
+                
 
                 // Check if subjects are retrieved
                 if ($result->num_rows > 0) {
