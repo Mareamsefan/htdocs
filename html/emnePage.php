@@ -83,7 +83,7 @@
         <div class="mening">
           <p>Si hva du mener om emnet til andre!</p>
         </div>
-        <form class="comment-container">
+        <form class="comment-container" method="post" action="../php/registerMessage.php">
           <article class="comment">
             <header class="comment-header">
               <div class="img"></div>
