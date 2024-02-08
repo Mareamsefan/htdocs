@@ -22,11 +22,11 @@ $mail->Port = 587;
 
 //Recipients
 $mail->setFrom('dittnyepassord@gmail.com', 'Mailer');
-$mail->addAddress('yaya.abbdi@gmail.com', 'Yaya');
+$mail->addAddress('');
 
 // Legg til emne og melding
 $mail->Subject = 'Subject of Email';
-$mail->Body = 'Content of your email goes here';
+$mail->Body = 'Content';
 
 // Send e-post
 if(!$mail->send()) {
