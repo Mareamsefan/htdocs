@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             VALUES ('$FirstName', '$LastName', '$Email', '$StudyProgram', '$Class', '$Password')";
 
     if ($mysqli->query($sql) === TRUE) {
-        echo "Data lagt til i databasen!";
+        header("Location: /index.html");
     } else {
         echo "Feil: " . $sql . "<br>" . $mysqli->error;
     }
