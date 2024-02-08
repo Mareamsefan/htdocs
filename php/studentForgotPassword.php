@@ -1,4 +1,9 @@
 <?php
+define ('MAILHOST', "smtp.gmail.com");
+define ('USERNAME', "dittnyepassord@gmail.com");
+define ('PASSWORD', "jjak kudj bduz iqqg");
+define ('SEND_FROM', "Helt trygg e-post!");
+
 
 function generatePassword($length = 8) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
