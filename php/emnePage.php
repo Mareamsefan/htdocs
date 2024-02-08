@@ -50,7 +50,7 @@
                     SELECT FirstName, LastName
                     FROM lecturer as l, lecturer_has_subject as lhs, subject as s
                     WHERE s.SubjectPIN = '$subject_pin' 
-                    AND s.SubjectPIN = lhs.Subject_SubjectCode
+                    AND s.SubjectCode = lhs.Subject_SubjectCode
                     AND lhs.Lecturer_ID = l.ID
                     SQL;
                 $result = $mysqli->query($sql);
@@ -84,7 +84,7 @@
         <div class="mening">
           <p>Si hva du mener om emnet til andre!</p>
         </div>
-        <form class="comment-container">
+        <form class="comment-container" id="message" action="../php/sendMessage.php" method="post">
           <article class="comment">
             <header class="comment-header">
               <div class="img"></div>

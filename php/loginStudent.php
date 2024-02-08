@@ -25,6 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             $userId = $row['ID'];
             $_SESSION['user_id'] = $userId;
+            $_SESSION['account_type'] = 1; // 1 = user is a student
 
             $sql = "UPDATE Student SET remember_token = '$token' WHERE ID = $userId";
             mysqli_query($mysqli, $sql);

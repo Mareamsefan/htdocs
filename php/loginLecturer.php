@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mysqli_query($mysqli, $sql); 
 
             $_SESSION['user_id'] = $userId;
+            $_SESSION['account_type'] = 2; // 2 = user is a lecturer
 
             header("Location: /php/lecturerDashboard.php?");
             
