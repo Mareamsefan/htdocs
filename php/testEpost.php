@@ -22,7 +22,7 @@ $mail->Port = 587;
 
 //Recipients
 $mail->setFrom('dittnyepassord@gmail.com', 'Mailer');
-$mail->addAddress('');
+$mail->addAddress('sefanmaream@gmail.com');
 
 // Legg til emne og melding
 $mail->Subject = 'Subject of Email';
