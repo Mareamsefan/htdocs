@@ -24,7 +24,7 @@
           $mysqli->close();
           ?>
         <ul>
-          <li><a href="../index.html">Hjem</a></li>
+          <li><a href="../../index.html">Hjem</a></li>
         </ul>
       </nav>
     </header>
