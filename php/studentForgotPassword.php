@@ -1,5 +1,4 @@
 <?php
-<?php
 $mysqli = require __DIR__ . "/database.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -49,25 +48,10 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
         exit;
     }
 
-
-    // Sjekke om det har gått 15 min siden passordet ble generert 
-    $sql_check_timestamp = "SELECT password_timestamp FROM student WHERE email='$email'";
-    $result_check_timestamp = $mysqli->query($sql_check_timestamp);
-    $row_check_timestamp = $result_check_timestamp->fetch_assoc();
-    $password_timestamp = strtotime($row_check_timestamp['password_timestamp']);
-    $current_time = time();
-    $fifteen_minutes = 60 * 15; // 15 minutter i sekunder
-
-    // sjekker om det har gått 15 minutter 
-    if ($current_time - $password_timestamp > $fifteen_minutes) {
-        $sql_delete_expired_password = "DELETE FROM student WHERE password_timestamp < DATE_SUB(NOW(), INTERVAL 15 MINUTE)";
-        $mysqli->query($sql_delete_expired_password);
-    }
-
     $newPassword = generatePassword();
     $timestamp = date("Y-m-d H:i:s"); // lagrer tiden passordet ble generert 
   
-    $sql_update_password = "UPDATE lecturer SET password='$newPassword', password_timestamp='$timestamp' WHERE email='$email'";
+    $sql_update_password = "UPDATE student SET password='$newPassword', password_timestamp='$timestamp' WHERE email='$email'";
     $mysqli->query($sql_update_password);
 
     //Recipients
@@ -92,6 +76,5 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
 
     $mysqli->close();
 }
-
 ?>
 

@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Password = $_POST["Password"];
     $RememberMe = isset($_POST["RememberMe"]); 
 
-    $sql = "SELECT COUNT(*) AS count_exists, ID, password_timestamp FROM Student WHERE Email = '$Email' AND Password = '$Password' GROUP BY ID";
+    $sql = "SELECT COUNT(*) AS count_exists, ID, password_timestamp FROM lecturer WHERE Email = '$Email' AND Password = '$Password' GROUP BY ID";
     $result = $mysqli->query($sql);
 
     if ($result) {
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Sjekk om passordet har utløpt
         if ($current_time - $password_timestamp > $fifteen_minutes) {
-            $sql_delete_expired_password = "UPDATE Student SET Password = NULL";
+            $sql_delete_expired_password = "UPDATE lecturer SET Password = NULL";
             $mysqli->query($sql_delete_expired_password);
             echo "Feil, sjekk at passord og e-post er riktig.";
             exit;
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 setcookie("remember_token", $token, time() + 3600*24*7); 
             }
             $userId = $row['ID']; 
-            $sql = "UPDATE Student SET remember_token = '$token' WHERE ID = $userId"; 
+            $sql = "UPDATE lecturer SET remember_token = '$token' WHERE ID = $userId"; 
             mysqli_query($mysqli, $sql); 
 
             $_SESSION['user_id'] = $userId;
