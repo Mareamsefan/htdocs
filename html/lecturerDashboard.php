@@ -51,7 +51,7 @@
 
             <section class="upload">
                 <h2>Last opp bilde</h2>
-                <form action="uploadImage.php" method="post" enctype="multipart/form-data">
+                <form action="../php/uploadImage.php" method="post" enctype="multipart/form-data">
                     Velg bilde for opplasting:
                     <input type="file" name="lecturerImage" id="lecturerImage">
                     <input type="submit" value="Last opp bilde" name="submit">
