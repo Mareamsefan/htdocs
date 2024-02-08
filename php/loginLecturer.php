@@ -30,7 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $_SESSION['user_id'] = $userId;
 
-            header("Location: /php/lecturerDashboard.php?email=$Email&password=$Password&id=$userId");
             header("Location: /php/lecturerDashboard.php?");
             
         } else {
