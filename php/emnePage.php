@@ -24,7 +24,7 @@
           $mysqli->close();
           ?>
         <ul>
-          <li><a href="../index.html">Hjem</a></li>
+          <li><a href="../../index.html">Hjem</a></li>
         </ul>
       </nav>
     </header>
@@ -49,7 +49,8 @@
                 $sql = <<<SQL
                     SELECT FirstName, LastName
                     FROM lecturer as l, lecturer_has_subject as lhs, subject as s
-                    WHERE s.SubjectPIN = lhs.Subject_SubjectCode
+                    WHERE s.SubjectPIN = '$subject_pin' 
+                    AND s.SubjectPIN = lhs.Subject_SubjectCode
                     AND lhs.Lecturer_ID = l.ID
                     SQL;
                 $result = $mysqli->query($sql);
