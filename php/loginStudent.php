@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mysqli_query($mysqli, $sql); 
 
             $_SESSION['user_id'] = $userId;
-            header("Location: /html/studentDashboard.html?&id=$userId");
+            header("Location: /php/studentDashboard.php?&id=$userId");
             
             exit();
               $lecturerID = $row['ID'];
