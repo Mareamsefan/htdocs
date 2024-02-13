@@ -40,9 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 echo "Feil, sjekk at passord og e-post er riktig.";
             }
-        } else {
-            echo "Feil i SQL-uttalelse: " . $mysqli->error;
-        }
+        } 
     }
 }
 
