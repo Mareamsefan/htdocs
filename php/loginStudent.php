@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $row_check_temp_password = $result_check_temp_password->fetch_assoc();
 
     // Hvis et midlertidig passord ble funnet og det ikke har gått mer enn 15 minutter siden det ble generert
-    if ($row_check_temp_password && strtotime($row_check_temp_password['password_timestamp']) > strtotime("-1 minutes")) {
+    if ($row_check_temp_password && strtotime($row_check_temp_password['password_timestamp']) > strtotime("-15 minutes")) {
         $userId = $row_check_temp_password['ID'];
 
         // Slett det midlertidige passordet

@@ -40,28 +40,12 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
     }
 
     // Sjekk om e-postadressen eksisterer i databasen
-    $sql_check_email = "SELECT COUNT(*) AS count FROM lecturer WHERE email='$email'";
+    $sql_check_email = "SELECT COUNT(*) AS count FROM student WHERE email='$email'";
     $result_check_email = $mysqli->query($sql_check_email);
     $row_check_email = $result_check_email->fetch_assoc();
     if ($row_check_email['count'] == 0) {
         echo "E-postadressen eksisterer ikke ";
         exit;
-    }
-
-
-    // Sjekke om det har gått 15 min siden passordet ble generert 
-    $sql_check_timestamp = "SELECT password_timestamp FROM lecturer WHERE email='$email'";
-    $result_check_timestamp = $mysqli->query($sql_check_timestamp);
-    $row_check_timestamp = $result_check_timestamp->fetch_assoc();
-    $password_timestamp = strtotime($row_check_timestamp['password_timestamp']);
-    $current_time = date("Y-m-d H:i:s");
-    $fifteen_minutes = 60 * 2; // 15 minutter i sekunder
-
-    // sjekker om det har gått 15 minutter 
-    if ($current_time - $password_timestamp > $fifteen_minutes) {
-        //WHERE password_timestamp < DATE_SUB(NOW(), INTERVAL 15 MINUTE)
-        $sql_delete_expired_password = "UPDATE lecturer SET temp_password=null";
-        $mysqli->query($sql_delete_expired_password);
     }
 
     $newPassword = generatePassword();
@@ -74,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
     $mail->setFrom('dittnyepassord@gmail.com', 'NotCanvas');
     $mail->addAddress($email);
 
-        // Legg til emne og melding
+    // Legg til emne og melding
     $mail->Subject = 'Gjenoppretting av kontoen din';
     $mail->Body = "\nHei, Dette er ditt nye passord: " . $newPassword . "\nVennligst bytt passordet 
     så fort du har logget deg inn." . "\nMed Vennlig Hilsen NotCanvas";
@@ -92,6 +76,5 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
 
     $mysqli->close();
 }
-
-
 ?>
+
