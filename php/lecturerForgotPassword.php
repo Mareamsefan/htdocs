@@ -54,19 +54,20 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
     $result_check_timestamp = $mysqli->query($sql_check_timestamp);
     $row_check_timestamp = $result_check_timestamp->fetch_assoc();
     $password_timestamp = strtotime($row_check_timestamp['password_timestamp']);
-    $current_time = time();
+    $current_time = date("Y-m-d H:i:s");
     $fifteen_minutes = 60 * 2; // 15 minutter i sekunder
 
     // sjekker om det har gått 15 minutter 
     if ($current_time - $password_timestamp > $fifteen_minutes) {
-        $sql_delete_expired_password = "DELETE FROM lecturer WHERE password_timestamp < DATE_SUB(NOW(), INTERVAL 15 MINUTE)";
+        //WHERE password_timestamp < DATE_SUB(NOW(), INTERVAL 15 MINUTE)
+        $sql_delete_expired_password = "UPDATE lecturer SET temp_password=null";
         $mysqli->query($sql_delete_expired_password);
     }
 
     $newPassword = generatePassword();
     $timestamp = date("Y-m-d H:i:s"); // lagrer tiden passordet ble generert 
   
-    $sql_update_password = "UPDATE lecturer SET password='$newPassword', password_timestamp='$timestamp' WHERE email='$email'";
+    $sql_update_password = "UPDATE lecturer SET temp_password='$newPassword', password_timestamp='$timestamp' WHERE email='$email'";
     $mysqli->query($sql_update_password);
 
     //Recipients

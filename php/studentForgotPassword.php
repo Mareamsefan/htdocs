@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
     $newPassword = generatePassword();
     $timestamp = date("Y-m-d H:i:s"); // lagrer tiden passordet ble generert 
   
-    $sql_update_password = "UPDATE student SET password='$newPassword', password_timestamp='$timestamp' WHERE email='$email'";
+    $sql_update_password = "UPDATE student SET temp_password='$newPassword', password_timestamp='$timestamp' WHERE email='$email'";
     $mysqli->query($sql_update_password);
 
     //Recipients
