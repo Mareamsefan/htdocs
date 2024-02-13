@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $mysqli = require __DIR__ . "/database.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -56,8 +58,19 @@ function login($mysqli, $userId, $RememberMe) {
     $sql = "UPDATE Student SET remember_token = '$token' WHERE ID = $userId"; 
     mysqli_query($mysqli, $sql); 
 
-    $_SESSION['user_id'] = $userId;
-    header("Location: /php/studentDashboard.php");
-    exit();
+            $_SESSION['user_id'] = $userId;
+            header("Location: /php/studentDashboard.php");
+            
+            exit();
+              $lecturerID = $row['ID'];
+        } else {
+            echo "Feil, sjekk at passord og e-post er riktig.";
+        }
+    } else {
+        echo "Feil i SQL-uttalelse: " . $mysqli->error;
+    }
 }
+// Close the connection
+$mysqli->close();
 ?>
+
