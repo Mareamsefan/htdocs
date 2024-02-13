@@ -68,8 +68,7 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
     if(!$mail->send()) { 
         echo 'Meldingen kunne ikke sendes';
         echo 'Mailer Error: ' . $mail->ErrorInfo;
-    } else {
-        echo $timestamp;  
+    } else { 
         echo 'Meldingen med et nytt passord er nå sendt, sjekk mailen din.';
 
     }
