@@ -32,8 +32,9 @@
             echo "<h1>Dashboard til $StudentFirstName $StudentLastName</h1>";
 
             ?>
-            <ul>
-                <li><a href="../index.html">Hjem</a></li>
+            <ul class="Liste">
+                <li><a href="../../index.html">Hjem</a></li>
+                <li><a href="studentMinProfil.php">Min profil</a></li>
             </ul>
         </nav>
     </header>
