@@ -33,7 +33,7 @@
                 $row = $result->fetch_assoc();
                 $LecturerFirstName = $row['FirstName'];
                 $LecturerLastName = $row['LastName'];
-                echo "<h1>Dashboard til $LecturerFirstName $LecturerLastName</h1>";
+                echo "<h1>Dashboard til $LecturerFirstName $LecturerLastName and btw account_type = {$_SESSION['account_type']}</h1>";
                 ?>
                 <ul>
                     <li><a href="../../index.html">Hjem</a></li>
