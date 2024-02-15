@@ -19,3 +19,13 @@ body{
 h2{
     text-align-last: center;
 }
+
+a.button{
+    margin-top: 2rem;
+    margin-left: 4rem;
+    padding: 0.5rem;
+    text-decoration: none;
+    background-color: beige;
+    position: absolute;
+    border: inset; 
+}
