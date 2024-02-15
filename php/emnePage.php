@@ -134,14 +134,14 @@
                     echo '<p>' . $row["Message"] . '</p>';
 
                     // Student skal ikke kunne se reply button.
-                    if ($_SESSION['account_type'] != 1){
+                    if (isset($_SESSION['account_type']) && $_SESSION['account_type'] != 1){
                         echo '<div class="reply-btn">';
                         echo '<input class="submit" type="submit" value="reply" />';
                         echo '</div>';
                     }
 
                     // Kun Guest skal kunne se report button.
-                    if (($_SESSION['account_type'] != 1) && ($_SESSION['account_type'] != 2)){
+                    if (isset($_SESSION['account_type']) && ($_SESSION['account_type'] != 1) && ($_SESSION['account_type'] != 2)){
                         echo '<div class="report-btn">';
                         echo '<form action="../reportMessage.php" method="post">';
                         echo '<input type="hidden" name="message_id" value="' . $row["ID"] . '"/>';
@@ -169,7 +169,7 @@
 
                         echo '</div>';
 
-                    if ($_SESSION['account_type'] != 1) {
+                    if (empty($_SESSION['account_type']) || $_SESSION['account_type'] != 1) {
                         echo '<form class="comment-container reply-form" id="reply-form" action="../sendReply.php" method="post">';
                         echo '<article class="comment comment2">';
                         echo '<header class="comment-header">';
