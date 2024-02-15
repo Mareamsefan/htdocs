@@ -35,8 +35,9 @@
                 $LecturerLastName = $row['LastName'];
                 echo "<h1>Dashboard til $LecturerFirstName $LecturerLastName</h1>";
                 ?>
-                <ul>
+                <ul class="navList">
                     <li><a href="../../index.html">Hjem</a></li>
+                    <li><a href="../../index.html">Profil</a></li>
                 </ul>
             </nav>
         </header>

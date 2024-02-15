@@ -22,11 +22,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Unsupported content type: $content_type");
     }
 
-    $subject_subjectCode = $_GET["subject_pin"]; // Add a semicolon here
+    $subject_subjectPin = $_GET["subject_pin"]; // Add a semicolon here
 
     // Perform database operations
     // 1. Legger til riktig data i subject-tabellen
-    $sql = "INSERT INTO Message (Message, Student_ID, Subject_SubjectCode)
+    $sql = "INSERT INTO Message (Message, Student_ID, Subject_SubjectPin)
             VALUES ('$comment', '$userId', 'selsaa')";
     
     if ($mysqli->query($sql) === TRUE) {
