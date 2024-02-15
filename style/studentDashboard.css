@@ -72,3 +72,8 @@ button:hover{
     border-color: #47576826;
     transition-duration: 0.1s;
 }
+
+.Liste{
+    display: flex;
+    gap: 1rem; 
+}
