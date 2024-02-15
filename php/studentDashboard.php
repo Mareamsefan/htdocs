@@ -14,7 +14,24 @@
 
     <header class="header shadow bg">
         <nav>
-            <h1>Dashboard til "student navn"</h1>
+            <?php
+            session_start();
+            // Check if user ID is set in the session
+            if (isset($_SESSION['user_id'])) {
+                $userId = $_SESSION['user_id'];
+            } else {
+                header("Location: /index.html");
+            }
+
+            $mysqli = require __DIR__ . "/../php/database.php";
+            $sql = "SELECT FirstName, LastName FROM student WHERE ID = '$userId'";
+            $result = $mysqli->query($sql);
+            $row = $result->fetch_assoc();
+            $StudentFirstName = $row['FirstName'];
+            $StudentLastName = $row['LastName'];
+            echo "<h1>Dashboard til $StudentFirstName $StudentLastName</h1>";
+
+            ?>
             <ul>
                 <li><a href="../index.html">Hjem</a></li>
             </ul>
