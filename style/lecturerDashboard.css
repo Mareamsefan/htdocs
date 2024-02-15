@@ -29,8 +29,11 @@ nav {
     align-items: center;
 }
 
-ul {}
+#Lister{
+    display: flex;
+    gap: 1rem; 
 
+}
 .subjects {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -73,4 +76,9 @@ button:hover{
          background-color: #64718d;
         border-color: #47576826;
         transition-duration: 0.1s;
+}
+
+.Liste{
+    display: flex;
+    gap: 1rem; 
 }
