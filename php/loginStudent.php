@@ -55,7 +55,7 @@ function login($mysqli, $userId, $RememberMe) {
     mysqli_query($mysqli, $sql); 
 
     $_SESSION['user_id'] = $userId;
-    $_SESSION['account_type'] = 2; // 2 = user is a lecturer
+    $_SESSION['account_type'] = 1; // 1 = user is a student
 
     header("Location: /php/studentDashboard.php");
     exit();
