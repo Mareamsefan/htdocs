@@ -37,7 +37,7 @@
                 ?>
                 <ul class="Liste">
                     <li><a href="../../index.html">Hjem</a></li>
-                    <li><a href="MinProfil.php">Min profil</a></li>
+                    <li><a href="lecturerMinProfil.php">Min profil</a></li>
                 </ul>
             </nav>
         </header>
