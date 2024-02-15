@@ -31,7 +31,7 @@
         }
     },
     "require": {
-        "php": ">=5.5.0",
+        "php": ">=7.3",
         "ext-ctype": "*",
         "ext-filter": "*",
         "ext-hash": "*"

@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style/lecturerDashboard.css">
     <link rel="stylesheet" href="/style/reset.css">
     <link rel="stylesheet" href="/style/util.css">
+    <link rel="stylesheet" href="/style/lecturerDashboard.css">
     <title>Lærer Dashboard</title>
 </head>
 
@@ -33,11 +33,11 @@
                 $row = $result->fetch_assoc();
                 $LecturerFirstName = $row['FirstName'];
                 $LecturerLastName = $row['LastName'];
-                echo "<h1>Dashboard til $LecturerFirstName $LecturerLastName</h1>";
+                echo "<h1>Dashboard til $LecturerFirstName $LecturerLastName and btw account_type = {$_SESSION['account_type']}</h1>";
                 ?>
-                <ul class="navList">
+                <ul class="Liste">
                     <li><a href="../../index.html">Hjem</a></li>
-                    <li><a href="../../index.html">Profil</a></li>
+                    <li><a href="lecturerMinProfil.php">Min profil</a></li>
                 </ul>
             </nav>
         </header>
