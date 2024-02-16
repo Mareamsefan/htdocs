@@ -141,7 +141,7 @@
                     }
 
                     // Kun Guest skal kunne se report button.
-                    if (isset($_SESSION['account_type']) && ($_SESSION['account_type'] != 1) && ($_SESSION['account_type'] != 2)){
+                    if (empty($_SESSION['account_type'])){
                         echo '<div class="report-btn">';
                         echo '<form action="../reportMessage.php" method="post">';
                         echo '<input type="hidden" name="message_id" value="' . $row["ID"] . '"/>';
@@ -168,7 +168,7 @@
 
 
                         echo '</div>';
-
+                    // Gjest & Foreleser skal kunne se "reply"
                     if (empty($_SESSION['account_type']) || $_SESSION['account_type'] != 1) {
                         echo '<form class="comment-container reply-form" id="reply-form" action="../sendReply.php" method="post">';
                         echo '<article class="comment comment2">';
