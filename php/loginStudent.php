@@ -29,15 +29,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($result) {
             $row = $result->fetch_assoc();
-            $count_exists = $row['count_exists'];
-            $userId = $row['ID'];
-
-            if ($count_exists == 1) {
+            if($row){
+                $count_exists = $row['count_exists'];
+                $userId = $row['ID'];
+     
+                if ($count_exists == 1) {
                 // Logg inn brukeren
                 login($mysqli, $userId, $RememberMe);
+                } 
+
             } else {
                 echo "Feil, sjekk at passord og e-post er riktig.";
-            }
+            } 
+
         } else {
             echo "Feil ved pålogging. Vennligst prøv igjen.";
         }
