@@ -26,18 +26,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Hvis det midlertidige passordet ikke eksisterer eller er utløpt, sjekk det permanente passordet
         $sql = "SELECT COUNT(*) AS count_exists, ID FROM lecturer WHERE Email = '$Email' AND Password = '$Password' GROUP BY ID";
         $result = $mysqli->query($sql);
-
+        
         if ($result) {
             $row = $result->fetch_assoc();
-            $count_exists = $row['count_exists'];
-            $userId = $row['ID'];
-
-            if ($count_exists == 1) {
+            if($row){
+                $count_exists = $row['count_exists'];
+                $userId = $row['ID'];
+                if ($count_exists == 1) {
                 // Logg inn brukeren
                 login($mysqli, $userId, $RememberMe);
+                } 
+
             } else {
                 echo "Feil, sjekk at passord og e-post er riktig.";
-            }
+            } 
         } else {
             echo "Feil ved pålogging. Vennligst prøv igjen.";
         }
