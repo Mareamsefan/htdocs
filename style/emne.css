@@ -34,7 +34,6 @@ main {
   gap: 0.2rem;
 }
 .picture {
-  background: red;
   width: 8rem;
   height: 8rem;
   border-radius: 50%;
@@ -114,4 +113,10 @@ main {
 
 #reply-form {
   display: hidden;
+}
+
+.picture img {
+  border-radius: 50%;
+  height: 150px;
+
 }

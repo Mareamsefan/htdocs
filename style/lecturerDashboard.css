@@ -12,6 +12,8 @@ main {
     flex-direction: column;
 }
 
+
+
 main {}
 
 .main-header {
@@ -82,3 +84,4 @@ button:hover{
     display: flex;
     gap: 1rem; 
 }
+
