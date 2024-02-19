@@ -17,23 +17,34 @@ if (($_POST["reply"] != null) && ($_POST["message_id"] != null) &&
 
     // Message from (a) lecturer
     if ($accountType == 2){
-        $sql = "INSERT INTO reply (Message, from_teacher, Message_ID) 
-            VALUES ('$reply', 1, '$messageID')";
+        $check = "SELECT * FROM reply WHERE Message_ID = $messageID AND from_teacher = 1";
+        $result = $mysqli->query($check);
+
+        // Check if reply from a lecturer already exists
+        if ($result->num_rows == 0){
+            $sql = "INSERT INTO reply (Message, from_teacher, Message_ID) VALUES ('$reply', 1, '$messageID')";
+            if ($mysqli->query($sql) === TRUE) {
+                header("Location: /api/emnePage.php/?subject_pin=$subjectPIN");
+            } else {
+                echo "Error submitting message. Please try again.";
+            }
+        }
+        else{
+            header("Location: /api/emnePage.php/?subject_pin=$subjectPIN");
+        }
     }
     // Message from Guest
     else{
         $sql = "INSERT INTO reply (Message, from_teacher, Message_ID) 
             VALUES ('$reply', 0, '$messageID')";
+        if ($mysqli->query($sql) === TRUE) {
+            header("Location: /api/emnePage.php/?subject_pin=$subjectPIN");
+        } else {
+            echo "Error submitting message. Please try again.";
+        }
     }
-
-    if ($mysqli->query($sql) === TRUE) {
-        header("Location: /api/emnePage.api/?subject_pin=$subjectPIN");
-    } else {
-        echo "Error submitting message. Please try again.";
-    }
-
 }
 else{
     $subjectPIN = $_POST["subject_pin"];
-    header("Location: /api/emnePage.api/?subject_pin=$subjectPIN");
+    header("Location: /api/emnePage.php/?subject_pin=$subjectPIN");
 }
