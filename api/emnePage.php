@@ -68,7 +68,7 @@ $row = $result->fetch_assoc();
           
           echo "<h2>" . $row['SubjectName'] . "</h2>";
           echo "<div class='lecturer'>
-            <div class='picture'><img src='$src_path' /></div>";
+            <div class='picture'><img height='150px' width='150px' src='$src_path' /></div>";
             $mysqli->close();
             ?>
             <div>
