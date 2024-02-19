@@ -12,7 +12,8 @@
     </header>
     <main>
         <h2>Legg til faglærer</h2>
-        <form id="register" action="../api/registerLecturer.php" method="post">
+        <p>Husk at alle felt, inkl. bildeopplasting må utfylles</p>
+        <form id="register" action="../api/registerLecturer.php" method="post" enctype="multipart/form-data">
 
             <label for="FirstName">Fornavn:</label>
             <input type="text" id="FirstName" name="FirstName" required>
@@ -34,6 +35,9 @@
 
             <label for="SubjectPIN">PIN:</label>
             <input type="text" id="SubjectPIN" name="SubjectPIN" required>
+
+            <label for="lecturerImage">Bilde av deg selv</label>
+            <input type="file" name="lecturerImage" id="lecturerImage">
             
             <input id= "submit" type="submit" value="Legg til foreleser">
         </form>
