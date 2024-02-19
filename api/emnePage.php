@@ -198,6 +198,9 @@
   <script>
     const replyBtn = document.querySelectorAll(".reply-btn");
     const replyForm = document.querySelectorAll(".reply-form");
+    console.log("reply btn",replyBtn);
+    console.log("reply btn", replyForm);
+
     
     window.onload = function(){
       toggleReply()
@@ -209,6 +212,8 @@
         replyForm.style.display = "block";
       } else {
         replyForm.style.display = "none";
+        console.log("test her: "); 
+
       }
     }
     replyBtn.addEventListener("click", toggleReply);
