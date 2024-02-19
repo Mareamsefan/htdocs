@@ -1,3 +1,16 @@
+<?php
+session_start();
+$mysqli = require __DIR__ . "/../php/database.php";
+$subject_pin = $_GET['subject_pin'] ?? '';
+
+// Fetch data for the header
+$sql = "SELECT SubjectName FROM subject WHERE SubjectPIN = '$subject_pin'";
+$result = $mysqli->query($sql);
+$row = $result->fetch_assoc();
+
+// Your HTML and PHP code for the header...
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,16 +45,32 @@
       <section class="content">
         <header class="content-header">
           <?php
+           // session_start();
+             // Check if user ID is set in the session
+             if (isset($_SESSION['user_id'])) {
+              // Retrieve user ID
+              $userId = $_SESSION['user_id'];
+              // echo "User ID: " . $userId;
+          } else {
+              echo "User ID not found in session.";
+          }
           $mysqli = require __DIR__ . "/../php/database.php";
           $subject_pin = $_GET['subject_pin'] ?? '';
           $sql = "SELECT SubjectName FROM subject WHERE SubjectPIN = '$subject_pin'";
           $result = $mysqli->query($sql);
           $row = $result->fetch_assoc();
+          //Get lecturer from DB
+          $lecturer = "SELECT * FROM lecturer where ID = '$userId'";;
+          $lecturer_result = $mysqli->query($lecturer);
+          $lecturer_row = $lecturer_result->fetch_assoc();
+          $img = $lecturer_row['prof']; 
+          $src_path = "/img/$img";
+          
           echo "<h2>" . $row['SubjectName'] . "</h2>";
-          $mysqli->close();
-          ?>
-          <div class="lecturer">
-            <div class="picture"></div>
+          echo "<div class='lecturer'>
+            <div class='picture'><img src='$src_path' /></div>";
+            $mysqli->close();
+            ?>
             <div>
               <?php
               $mysqli = require __DIR__ . "/../php/database.php";
@@ -101,7 +130,7 @@
         </form>
         <section class="comments-section">
             <?php
-            session_start();
+          //  session_start();
             $subject_pin = $_GET['subject_pin'] ?? '';
             $mysqli = require __DIR__ . "/../php/database.php";
             $sql = "SELECT DISTINCT m.* FROM message AS m WHERE m.subject_SubjectPIN = $subject_pin ORDER BY m.ID DESC";

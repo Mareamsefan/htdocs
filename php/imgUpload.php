@@ -13,15 +13,15 @@ $target_dir = "../img/"; // Ensure this directory exists in your project
 $target_file = $target_dir . basename($_FILES["lecturerImage"]["name"]);
 
 if (move_uploaded_file($_FILES["lecturerImage"]["tmp_name"], $target_file)) {
-   // header('Location: lecturerDashboard.php');
     echo "The file " . htmlspecialchars(basename($_FILES["lecturerImage"]["name"])) . " er lastet opp.";
     $file_name = htmlspecialchars(basename($_FILES["lecturerImage"]["name"]));
     echo $userId;
-
+    
     $sql = "UPDATE lecturer
     SET prof = '$file_name'
     WHERE ID = $userId;";
     $result = $mysqli->query($sql);
+     header('Location: lecturerDashboard.php');
 
 } else {
     echo "Her gikk noe galt!.";
