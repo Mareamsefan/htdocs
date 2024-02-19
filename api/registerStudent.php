@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Perform database operations
-    $sql = "INSERT INTO Student (FirstName, LastName, Email, StudyProgram, Class, Password) 
+    $sql = "INSERT INTO student (FirstName, LastName, Email, StudyProgram, Class, Password)
             VALUES ('$FirstName', '$LastName', '$Email', '$StudyProgram', '$Class', '$Password')";
 
     if ($mysqli->query($sql) === TRUE) {

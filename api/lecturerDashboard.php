@@ -28,7 +28,7 @@
 
                 // testing
                 $mysqli = require __DIR__ . "/../api/database.php";
-                $sql = "SELECT FirstName, LastName FROM Lecturer WHERE ID = '$userId'";
+                $sql = "SELECT FirstName, LastName FROM lecturer WHERE ID = '$userId'";
                 $result = $mysqli->query($sql);
                 $row = $result->fetch_assoc();
                 $LecturerFirstName = $row['FirstName'];

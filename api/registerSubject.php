@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Perform database operations
     // 1. Legger til riktig data i subject-tabellen
-    $sql = "INSERT INTO Subject (SubjectCode, SubjectName, SubjectPIN)
+    $sql = "INSERT INTO subject (SubjectCode, SubjectName, SubjectPIN)
             VALUES ('$SubjectCode', '$SubjectName', '$SubjectPIN')";
     if ($mysqli->query($sql) === TRUE) {
         echo "Data lagt til i databasen!";
