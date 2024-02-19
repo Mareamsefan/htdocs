@@ -9,7 +9,7 @@
  } else {
      echo "User ID not found in session.";
  }
-$target_dir = "../img/"; // Ensure this directory exists in your project
+$target_dir = "../img/";
 $target_file = $target_dir . basename($_FILES["lecturerImage"]["name"]);
 
 if (move_uploaded_file($_FILES["lecturerImage"]["tmp_name"], $target_file)) {
@@ -18,7 +18,7 @@ if (move_uploaded_file($_FILES["lecturerImage"]["tmp_name"], $target_file)) {
     echo $userId;
     
     $sql = "UPDATE lecturer
-    SET prof = '$file_name'
+    SET lecturerImage = '$file_name'
     WHERE ID = $userId;";
     $result = $mysqli->query($sql);
      header('Location: lecturerDashboard.php');

@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if ($mysqli->query($sql) === TRUE) {
         echo "Data lagt til i databasen!";
-        header("Location: /html/loginLecturer.html");
+        header("Location: /api/loginLecturer.php");
     } else {
         echo "Feil: " . $sql . "<br>" . $mysqli->error;
     }

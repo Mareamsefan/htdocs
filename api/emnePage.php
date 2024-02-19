@@ -63,12 +63,12 @@ $row = $result->fetch_assoc();
           $lecturer = "SELECT * FROM lecturer where ID = '$userId'";;
           $lecturer_result = $mysqli->query($lecturer);
           $lecturer_row = $lecturer_result->fetch_assoc();
-          $img = $lecturer_row['prof']; 
+          $img = $lecturer_row['lecturerImage'];
           $src_path = "/img/$img";
           
           echo "<h2>" . $row['SubjectName'] . "</h2>";
           echo "<div class='lecturer'>
-            <div class='picture'><img src='$src_path' /></div>";
+            <div class='picture'><img height='150px' width='150px' src='$src_path' /></div>";
             $mysqli->close();
             ?>
             <div>
@@ -80,7 +80,7 @@ $row = $result->fetch_assoc();
                     FROM lecturer as l, lecturer_has_subject as lhs, subject as s
                     WHERE s.SubjectPIN = '$subject_pin' 
                     AND s.SubjectCode = lhs.Subject_SubjectCode
-                    AND lhs.Lecturer_ID = l.ID
+                    AND lhs.lecturer_ID = l.ID
                     SQL;
               $result = $mysqli->query($sql);
               $row = $result->fetch_assoc();
