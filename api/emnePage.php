@@ -60,7 +60,7 @@ $row = $result->fetch_assoc();
           $result = $mysqli->query($sql);
           $row = $result->fetch_assoc();
           //Get lecturer from DB
-          $lecturer = "SELECT * FROM lecturer where ID = '$userId'";;
+          $lecturer = "SELECT * FROM lecturer where ID = '$userId'";
           $lecturer_result = $mysqli->query($lecturer);
           $lecturer_row = $lecturer_result->fetch_assoc();
           $img = $lecturer_row['lecturerImage'];
