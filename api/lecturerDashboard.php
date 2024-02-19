@@ -28,7 +28,7 @@
 
                 // testing
                 $mysqli = require __DIR__ . "/../api/database.php";
-                $sql = "SELECT FirstName, LastName FROM Lecturer WHERE ID = '$userId'";
+                $sql = "SELECT FirstName, LastName FROM lecturer WHERE ID = '$userId'";
                 $result = $mysqli->query($sql);
                 $row = $result->fetch_assoc();
                 $LecturerFirstName = $row['FirstName'];
@@ -68,7 +68,7 @@
                 $sql = "SELECT DISTINCT s.*
                 FROM subject AS s
                 INNER JOIN lecturer_has_subject AS lhs ON s.SubjectCode = lhs.Subject_SubjectCode
-                INNER JOIN lecturer AS l ON lhs.Lecturer_ID = l.ID
+                INNER JOIN lecturer AS l ON lhs.lecturer_ID = l.ID
                 WHERE l.ID = $userId";
                 $result = $mysqli->query($sql);
 

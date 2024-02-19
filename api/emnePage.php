@@ -80,7 +80,7 @@ $row = $result->fetch_assoc();
                     FROM lecturer as l, lecturer_has_subject as lhs, subject as s
                     WHERE s.SubjectPIN = '$subject_pin' 
                     AND s.SubjectCode = lhs.Subject_SubjectCode
-                    AND lhs.Lecturer_ID = l.ID
+                    AND lhs.lecturer_ID = l.ID
                     SQL;
               $result = $mysqli->query($sql);
               $row = $result->fetch_assoc();
