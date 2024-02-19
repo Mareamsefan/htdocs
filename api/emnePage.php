@@ -52,23 +52,28 @@ $row = $result->fetch_assoc();
               $userId = $_SESSION['user_id'];
               // echo "User ID: " . $userId;
           } else {
-              echo "User ID not found in session.";
+              echo "Welcome, guest!";
           }
           $mysqli = require __DIR__ . "/../api/database.php";
           $subject_pin = $_GET['subject_pin'] ?? '';
           $sql = "SELECT SubjectName FROM subject WHERE SubjectPIN = '$subject_pin'";
           $result = $mysqli->query($sql);
           $row = $result->fetch_assoc();
-          //Get lecturer from DB
-          $lecturer = "SELECT * FROM lecturer where ID = '$userId'";;
-          $lecturer_result = $mysqli->query($lecturer);
-          $lecturer_row = $lecturer_result->fetch_assoc();
-          $img = $lecturer_row['lecturerImage'];
-          $src_path = "/img/$img";
-          
-          echo "<h2>" . $row['SubjectName'] . "</h2>";
+          $sql = <<<SQL
+                    SELECT lecturerImage
+                    FROM lecturer as l, lecturer_has_subject as lhs, subject as s
+                    WHERE s.SubjectPIN = $subject_pin
+                    AND s.SubjectCode = lhs.Subject_SubjectCode
+                    AND lhs.Lecturer_ID = l.ID
+                    SQL;
+          $result = $mysqli->query($sql);
+          if ($result && $result->num_rows > 0) {
+              $row = $result->fetch_assoc();
+              $img_path = "/img/" . $row['lecturerImage'];
+          }
+
           echo "<div class='lecturer'>
-            <div class='picture'><img height='150px' width='150px' src='$src_path' /></div>";
+            <div class='picture'><img height='150px' width='150px' src='$img_path' /></div>";
             $mysqli->close();
             ?>
             <div>
