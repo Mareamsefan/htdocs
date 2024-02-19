@@ -33,7 +33,7 @@
                 <?php
 
                     // URL of the API endpoint
-$url = "http://localhost/php/api/subjects/getAllSubjects.php";
+$url = "http://localhost/api/api/subjects/getAllSubjects.php";
 
 // Fetch data from the API
 $response = file_get_contents($url);
