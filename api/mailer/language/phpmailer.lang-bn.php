@@ -7,7 +7,7 @@
  */
 
 $PHPMAILER_LANG['authenticate']         = 'SMTP ত্রুটি: প্রমাণীকরণ করতে অক্ষম৷';
-$PHPMAILER_LANG['buggy_php']            = 'আপনার PHP সংস্করণ একটি বাগ দ্বারা প্রভাবিত হয় যার ফলে দূষিত বার্তা হতে পারে। এটি ঠিক করতে, পাঠাতে SMTP ব্যবহার করুন, আপনার php.ini এ mail.add_x_header বিকল্পটি নিষ্ক্রিয় করুন, MacOS বা Linux-এ স্যুইচ করুন, অথবা আপনার PHP সংস্করণকে 7.0.17+ বা 7.1.3+ এ পরিবর্তন করুন।';
+$PHPMAILER_LANG['buggy_php']            = 'আপনার PHP সংস্করণ একটি বাগ দ্বারা প্রভাবিত হয় যার ফলে দূষিত বার্তা হতে পারে। এটি ঠিক করতে, পাঠাতে SMTP ব্যবহার করুন, আপনার api.ini এ mail.add_x_header বিকল্পটি নিষ্ক্রিয় করুন, MacOS বা Linux-এ স্যুইচ করুন, অথবা আপনার PHP সংস্করণকে 7.0.17+ বা 7.1.3+ এ পরিবর্তন করুন।';
 $PHPMAILER_LANG['connect_host']         = 'SMTP ত্রুটি: SMTP সার্ভারের সাথে সংযোগ করতে অক্ষম৷';
 $PHPMAILER_LANG['data_not_accepted']    = 'SMTP ত্রুটি: ডেটা গ্রহণ করা হয়নি৷';
 $PHPMAILER_LANG['empty_message']        = 'বার্তার অংশটি খালি।';

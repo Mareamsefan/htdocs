@@ -10,7 +10,7 @@
  }
  $mysqli = require __DIR__ . "/../../../database.php";
  
- // kode hentet lecturerDashboard.php fil
+ // kode hentet lecturerDashboard.api fil
  // SQL for å finne alle subjects til innlogget lecturer :)
                 // Hentet for det meste kode fra chatGPT for denne. Se log under.
                 // https://chat.openai.com/share/d8d4c359-b56e-4983-acac-acd2e754765f

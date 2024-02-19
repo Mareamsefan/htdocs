@@ -58,7 +58,7 @@ function login($mysqli, $userId, $RememberMe) {
 
     $_SESSION['user_id'] = $userId;
     $_SESSION['account_type'] = 2; // 2 = user is a lecturer
-    header("Location: /php/lecturerDashboard.php");
+    header("Location: /api/lecturerDashboard.php");
     exit();
 }
 ?>

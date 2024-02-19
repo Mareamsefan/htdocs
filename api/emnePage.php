@@ -15,7 +15,7 @@
     <header class="header shadow bg">
       <nav>
           <?php
-          $mysqli = require __DIR__ . "/../php/database.php";
+          $mysqli = require __DIR__ . "/../api/database.php";
           $subject_pin = $_GET['subject_pin'] ?? '';
           $sql = "SELECT SubjectName FROM subject WHERE SubjectPIN = '$subject_pin'";
           $result = $mysqli->query($sql);
@@ -32,7 +32,7 @@
       <section class="content">
         <header class="content-header">
             <?php
-            $mysqli = require __DIR__ . "/../php/database.php";
+            $mysqli = require __DIR__ . "/../api/database.php";
             $subject_pin = $_GET['subject_pin'] ?? '';
             $sql = "SELECT SubjectName FROM subject WHERE SubjectPIN = '$subject_pin'";
             $result = $mysqli->query($sql);
@@ -44,7 +44,7 @@
             <div class="picture"></div>
             <div>
                 <?php
-                $mysqli = require __DIR__ . "/../php/database.php";
+                $mysqli = require __DIR__ . "/../api/database.php";
                 $subject_pin = $_GET['subject_pin'] ?? '';
                 $sql = <<<SQL
                     SELECT FirstName, LastName
@@ -67,7 +67,7 @@
           </header>
           <div>
               <?php
-              $mysqli = require __DIR__ . "/../php/database.php";
+              $mysqli = require __DIR__ . "/../api/database.php";
               $subject_pin = $_GET['subject_pin'] ?? '';
               $sql = "SELECT SubjectCode, SubjectName, SubjectPIN FROM subject WHERE SubjectPIN = '$subject_pin'";
               $result = $mysqli->query($sql);
@@ -103,7 +103,7 @@
             <?php
             session_start();
             $subject_pin = $_GET['subject_pin'] ?? '';
-            $mysqli = require __DIR__ . "/../php/database.php";
+            $mysqli = require __DIR__ . "/../api/database.php";
             $sql = "SELECT DISTINCT m.* FROM message AS m WHERE m.subject_SubjectPIN = $subject_pin ORDER BY m.ID DESC";
             $result = $mysqli->query($sql);
 

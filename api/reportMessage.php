@@ -6,7 +6,7 @@ $subjectPIN = $_POST["subject_pin"];
 $sql = "UPDATE message SET Reported = 1 WHERE message.ID = $messageID";
 
 if ($mysqli->query($sql) === TRUE) {
-    header("Location: /php/emnePage.php/?subject_pin=$subjectPIN");
+    header("Location: /api/emnePage.api/?subject_pin=$subjectPIN");
 } else {
     echo "Error reporting message. Please try again.";
 }

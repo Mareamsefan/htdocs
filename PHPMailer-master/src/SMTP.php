@@ -131,17 +131,17 @@ class SMTP
      * Options:
      * * `echo` Output plain-text as-is, appropriate for CLI
      * * `html` Output escaped, line breaks converted to `<br>`, appropriate for browser output
-     * * `error_log` Output to error log as configured in php.ini
+     * * `error_log` Output to error log as configured in api.ini
      * Alternatively, you can provide a callable expecting two params: a message string and the debug level:
      *
-     * ```php
+     * ```api
      * $smtp->Debugoutput = function($str, $level) {echo "debug level $level; message: $str";};
      * ```
      *
      * Alternatively, you can pass in an instance of a PSR-3 compatible logger, though only `debug`
      * level output is used:
      *
-     * ```php
+     * ```api
      * $mail->Debugoutput = new myPsr3Logger;
      * ```
      *
@@ -650,7 +650,7 @@ class SMTP
         //The following borrowed from
         //http://php.net/manual/en/function.mhash.php#27225
 
-        //RFC 2104 HMAC implementation for php.
+        //RFC 2104 HMAC implementation for api.
         //Creates an md5 HMAC.
         //Eliminates the need to install mhash to compute a HMAC
         //by Lance Rushing

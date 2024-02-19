@@ -25,7 +25,7 @@
         }
 
         // testing
-        $mysqli = require __DIR__ . "/../php/database.php";
+        $mysqli = require __DIR__ . "/../api/database.php";
         $sql = "SELECT FirstName, LastName, Email, password FROM Lecturer WHERE ID = '$userId'";
         $result = $mysqli->query($sql);
         $row = $result->fetch_assoc();

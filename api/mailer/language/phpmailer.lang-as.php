@@ -7,7 +7,7 @@
  */
 
 $PHPMAILER_LANG['authenticate']         = 'SMTP ত্ৰুটি: প্ৰমাণীকৰণ কৰিব নোৱাৰি';
-$PHPMAILER_LANG['buggy_php']            = 'আপোনাৰ PHP সংস্কৰণ এটা বাগৰ দ্বাৰা প্ৰভাৱিত হয় যাৰ ফলত নষ্ট বাৰ্তা হব পাৰে । ইয়াক সমাধান কৰিবলে, প্ৰেৰণ কৰিবলে SMTP ব্যৱহাৰ কৰক, আপোনাৰ php.ini ত mail.add_x_header বিকল্প নিষ্ক্ৰিয় কৰক, MacOS বা Linux লৈ সলনি কৰক, বা আপোনাৰ PHP সংস্কৰণ 7.0.17+ বা 7.1.3+ লৈ সলনি কৰক ।';
+$PHPMAILER_LANG['buggy_php']            = 'আপোনাৰ PHP সংস্কৰণ এটা বাগৰ দ্বাৰা প্ৰভাৱিত হয় যাৰ ফলত নষ্ট বাৰ্তা হব পাৰে । ইয়াক সমাধান কৰিবলে, প্ৰেৰণ কৰিবলে SMTP ব্যৱহাৰ কৰক, আপোনাৰ api.ini ত mail.add_x_header বিকল্প নিষ্ক্ৰিয় কৰক, MacOS বা Linux লৈ সলনি কৰক, বা আপোনাৰ PHP সংস্কৰণ 7.0.17+ বা 7.1.3+ লৈ সলনি কৰক ।';
 $PHPMAILER_LANG['connect_host']         = 'SMTP ত্ৰুটি: SMTP চাৰ্ভাৰৰ সৈতে সংযোগ কৰিবলে অক্ষম';
 $PHPMAILER_LANG['data_not_accepted']    = 'SMTP ত্ৰুটি: তথ্য গ্ৰহণ কৰা হোৱা নাই';
 $PHPMAILER_LANG['empty_message']        = 'বাৰ্তাৰ মূখ্য অংশ খালী।';

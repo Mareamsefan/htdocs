@@ -27,7 +27,7 @@
                 }
 
                 // testing
-                $mysqli = require __DIR__ . "/../php/database.php";
+                $mysqli = require __DIR__ . "/../api/database.php";
                 $sql = "SELECT FirstName, LastName FROM Lecturer WHERE ID = '$userId'";
                 $result = $mysqli->query($sql);
                 $row = $result->fetch_assoc();
@@ -36,7 +36,7 @@
                 echo "<h1>Dashboard til $LecturerFirstName $LecturerLastName and btw account_type = {$_SESSION['account_type']}</h1>";
                 ?>
                 <ul class="Liste">
-                    <li><a href="../../index.html">Hjem</a></li>
+                    <li><a href="../../index.html">Logg ut</a></li>
                     <li><a href="lecturerMinProfil.php">Min profil</a></li>
                 </ul>
             </nav>
@@ -52,7 +52,7 @@
 
             <section class="upload">
                 <h2>Last opp bilde</h2>
-                <form action="../php/imgUpload.php" method="post" enctype="multipart/form-data">
+                <form action="/api/imgUpload.php" method="post" enctype="multipart/form-data">
                     Velg bilde for opplasting:
                     <input type="file" name="lecturerImage" id="lecturerImage">
                     <input type="submit" value="Last opp bilde" name="submit">
@@ -81,7 +81,7 @@
                         echo "<header class='subject-header'>";
                         echo "<h3>" . $row['SubjectName'] . "</h3>";
                         echo "</header>";
-                        echo "<button><a href='../../php/emnePage.php/?subject_pin={$row['SubjectPIN']}'>Besøk emneside</a></button>";
+                        echo "<button><a href='../../api/emnePage.php/?subject_pin={$row['SubjectPIN']}'>Besøk emneside</a></button>";
                         echo "</article>";
                     }
                 } else {

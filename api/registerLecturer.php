@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($content_type === "application/json") {
         // Handle JSON data
-        $json_data = file_get_contents("php://input");
+        $json_data = file_get_contents("api://input");
         $data = json_decode($json_data, true);
 
         $FirstName = $data["FirstName"];

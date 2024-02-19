@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($content_type === "application/json") {
         // Handle JSON data
-        $json_data = file_get_contents("php://input");
+        $json_data = file_get_contents("api://input");
         $data = json_decode($json_data, true);
 
         $SubjectCode = $data["SubjectCode"];
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($mysqli->query($sql) === TRUE) {
         echo "Data lagt til i lecturer_has_subject!";
-        header("Location: /php/lecturerDashboard.php");
+        header("Location: /api/lecturerDashboard.api");
     } else {
         echo "Feil: : " . $mysqli->error;
     }

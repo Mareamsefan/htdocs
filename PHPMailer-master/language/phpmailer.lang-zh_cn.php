@@ -9,7 +9,7 @@
  */
 
 $PHPMAILER_LANG['authenticate']         = 'SMTP 错误：登录失败。';
-$PHPMAILER_LANG['buggy_php']            = '您的 PHP 版本存在漏洞，可能会导致消息损坏。为修复此问题，请切换到使用 SMTP 发送，在您的 php.ini 中禁用 mail.add_x_header 选项。切换到 MacOS 或 Linux，或将您的 PHP 升级到 7.0.17+ 或 7.1.3+ 版本。';
+$PHPMAILER_LANG['buggy_php']            = '您的 PHP 版本存在漏洞，可能会导致消息损坏。为修复此问题，请切换到使用 SMTP 发送，在您的 api.ini 中禁用 mail.add_x_header 选项。切换到 MacOS 或 Linux，或将您的 PHP 升级到 7.0.17+ 或 7.1.3+ 版本。';
 $PHPMAILER_LANG['connect_host']         = 'SMTP 错误：无法连接到 SMTP 主机。';
 $PHPMAILER_LANG['data_not_accepted']    = 'SMTP 错误：数据不被接受。';
 $PHPMAILER_LANG['empty_message']        = '邮件正文为空。';

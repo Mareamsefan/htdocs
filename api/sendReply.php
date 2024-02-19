@@ -27,7 +27,7 @@ if (($_POST["reply"] != null) && ($_POST["message_id"] != null) &&
     }
 
     if ($mysqli->query($sql) === TRUE) {
-        header("Location: /php/emnePage.php/?subject_pin=$subjectPIN");
+        header("Location: /api/emnePage.api/?subject_pin=$subjectPIN");
     } else {
         echo "Error submitting message. Please try again.";
     }
@@ -35,5 +35,5 @@ if (($_POST["reply"] != null) && ($_POST["message_id"] != null) &&
 }
 else{
     $subjectPIN = $_POST["subject_pin"];
-    header("Location: /php/emnePage.php/?subject_pin=$subjectPIN");
+    header("Location: /api/emnePage.api/?subject_pin=$subjectPIN");
 }

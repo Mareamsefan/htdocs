@@ -69,9 +69,9 @@ can [download PHPMailer as a zip file](https://github.com/PHPMailer/PHPMailer/ar
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'path/to/PHPMailer/src/Exception.php';
-require 'path/to/PHPMailer/src/PHPMailer.php';
-require 'path/to/PHPMailer/src/SMTP.php';
+require 'path/to/PHPMailer/src/Exception.api';
+require 'path/to/PHPMailer/src/PHPMailer.api';
+require 'path/to/PHPMailer/src/SMTP.api';
 ```
 
 If you're not using the `SMTP` class explicitly (you're probably not), you don't need a `use` line for the SMTP class. Even if you're not using exceptions, you do still need to load the `Exception` class as it is used internally.
@@ -96,7 +96,7 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader
-require 'vendor/autoload.php';
+require 'vendor/autoload.api';
 
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
