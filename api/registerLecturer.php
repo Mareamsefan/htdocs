@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mysqli->query($sql);
 
     // 2. Hent lecturer ID fra database
-    $sql = "SELECT id FROM lecturer WHERE FirstName = '$FirstName' AND LastName = '$LastName' AND Email = '$Email'";
+    $sql = "SELECT id FROM Lecturer WHERE FirstName = '$FirstName' AND LastName = '$LastName' AND Email = '$Email'";
     $result = $mysqli->query($sql);
     $row = $result->fetch_assoc();
     $LecturerID = $row['id'];
@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if ($mysqli->query($sql) === TRUE) {
         echo "Data lagt til i databasen!";
-        header("Location: /html/loginLecturer.html");
+        header("Location: /api/loginLecturer.api");
     } else {
         echo "Feil: " . $sql . "<br>" . $mysqli->error;
     }

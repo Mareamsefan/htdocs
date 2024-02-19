@@ -63,7 +63,7 @@ $row = $result->fetch_assoc();
           $lecturer = "SELECT * FROM lecturer where ID = '$userId'";;
           $lecturer_result = $mysqli->query($lecturer);
           $lecturer_row = $lecturer_result->fetch_assoc();
-          $img = $lecturer_row['prof']; 
+          $img = $lecturer_row['lecturerImage'];
           $src_path = "/img/$img";
           
           echo "<h2>" . $row['SubjectName'] . "</h2>";

@@ -28,7 +28,7 @@
 
                 // testing
                 $mysqli = require __DIR__ . "/../api/database.php";
-                $sql = "SELECT FirstName, LastName FROM lecturer WHERE ID = '$userId'";
+                $sql = "SELECT FirstName, LastName FROM Lecturer WHERE ID = '$userId'";
                 $result = $mysqli->query($sql);
                 $row = $result->fetch_assoc();
                 $LecturerFirstName = $row['FirstName'];
@@ -47,17 +47,18 @@
                 <h2 class="title">Emner</h2>
             </header>
             <section class="add">
-                <button><a href="/html/registerSubject.html">Legg til emne</a></button>
+                <button><a href="/api/registerSubject.php">Legg til emne</a></button>
             </section>
 
             <section class="upload">
                 <h2>Last opp bilde</h2>
-                <form action="../api/imgUpload.php" method="post" enctype="multipart/form-data">
+                <form action="/api/imgUpload.php" method="post" enctype="multipart/form-data">
                     Velg bilde for opplasting:
                     <input type="file" name="lecturerImage" id="lecturerImage">
                     <input type="submit" value="Last opp bilde" name="submit">
                 </form>
             </section>
+
             <section class="subjects">
                 <?php
 
