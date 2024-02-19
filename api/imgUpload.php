@@ -1,4 +1,5 @@
 <?php
+$mysqli = require __DIR__ . "/database.php";
  session_start();
  include_once "database.php";
  // Check if user ID is set in the session
