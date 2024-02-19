@@ -27,7 +27,7 @@
                 <h2 class="title">Emner</h2>
             </header>
             <section class="add">
-                <button><a href="/html/registerSubject.html">Legg til emne</a></button>
+                <button><a href="/api/registerSubject.php">Legg til emne</a></button>
             </section>
             <section class="subjects">
                 <?php
