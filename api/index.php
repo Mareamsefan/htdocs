@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"]== "POST") {
         header("Location: /index.html");
     }
     else {
-        header("Location: /api/emnePage.api/?subject_pin={$subjectPIN}");
+        header("Location: /api/emnePage.php/?subject_pin={$subjectPIN}");
     }
 }
 ?>

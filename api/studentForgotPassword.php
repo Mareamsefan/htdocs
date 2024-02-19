@@ -6,8 +6,8 @@ use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
 // Inkluder PHPMailer auto-loader
-require 'C:\xampp\htdocs\PHPMailer-master\src\Exception.api';
-require 'C:\xampp\htdocs\PHPMailer-master\src\PHPMailer.api';
+require 'C:\xampp\htdocs\PHPMailer-master\src\Exception.php';
+require 'C:\xampp\htdocs\PHPMailer-master\src\PHPMailer.php';
 require 'C:\xampp\htdocs\PHPMailer-master\src\SMTP.php';
 
 // Opprett et nytt PHPMailer-objekt

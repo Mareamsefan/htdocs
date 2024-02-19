@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($mysqli->query($sql) === TRUE) {
         echo "Data lagt til i lecturer_has_subject!";
-        header("Location: /api/lecturerDashboard.api");
+        header("Location: /api/lecturerDashboard.php");
     } else {
         echo "Feil: : " . $mysqli->error;
     }
