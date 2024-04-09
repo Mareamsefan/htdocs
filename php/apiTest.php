@@ -9,9 +9,9 @@
     <h1>Emner</h1>
 
 <?php
-$apiUrl = "http://localhost/api/api/subjects/getAllSubjects.php"; // Replace with your actual API URL
+$phpUrl = "http://localhost/php/php/subjects/getAllSubjects.php"; // Replace with your actual API URL
 
-$ch = curl_init($apiUrl);
+$ch = curl_init($phpUrl);
 
 // Set cURL options
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

@@ -27,13 +27,13 @@
                 <h2 class="title">Emner</h2>
             </header>
             <section class="add">
-                <button><a href="/api/registerSubject.php">Legg til emne</a></button>
+                <button><a href="/php/registerSubject.php">Legg til emne</a></button>
             </section>
             <section class="subjects">
                 <?php
 
                     // URL of the API endpoint
-$url = "http://localhost/api/api/subjects/getAllSubjects.php";
+$url = "http://localhost/php/php/subjects/getAllSubjects.php";
 
 // Fetch data from the API
 $response = file_get_contents($url);

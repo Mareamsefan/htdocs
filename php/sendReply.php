@@ -24,13 +24,13 @@ if (($_POST["reply"] != null) && ($_POST["message_id"] != null) &&
         if ($result->num_rows == 0){
             $sql = "INSERT INTO reply (Message, from_teacher, Message_ID) VALUES ('$reply', 1, '$messageID')";
             if ($mysqli->query($sql) === TRUE) {
-                header("Location: /api/emnePage.php/?subject_pin=$subjectPIN");
+                header("Location: /php/emnePage.php/?subject_pin=$subjectPIN");
             } else {
                 echo "Error submitting message. Please try again.";
             }
         }
         else{
-            header("Location: /api/emnePage.php/?subject_pin=$subjectPIN");
+            header("Location: /php/emnePage.php/?subject_pin=$subjectPIN");
         }
     }
     // Message from Guest
@@ -38,7 +38,7 @@ if (($_POST["reply"] != null) && ($_POST["message_id"] != null) &&
         $sql = "INSERT INTO reply (Message, from_teacher, Message_ID) 
             VALUES ('$reply', 0, '$messageID')";
         if ($mysqli->query($sql) === TRUE) {
-            header("Location: /api/emnePage.php/?subject_pin=$subjectPIN");
+            header("Location: /php/emnePage.php/?subject_pin=$subjectPIN");
         } else {
             echo "Error submitting message. Please try again.";
         }
@@ -46,5 +46,5 @@ if (($_POST["reply"] != null) && ($_POST["message_id"] != null) &&
 }
 else{
     $subjectPIN = $_POST["subject_pin"];
-    header("Location: /api/emnePage.php/?subject_pin=$subjectPIN");
+    header("Location: /php/emnePage.php/?subject_pin=$subjectPIN");
 }

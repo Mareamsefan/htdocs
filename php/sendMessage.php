@@ -17,19 +17,19 @@ if (($_POST["comment"] != null) && ($_POST["subject_pin"] != null)){
             VALUES ('$comment', '$studentID', 0, '$subjectPIN')";
 
         if ($mysqli->query($sql) === TRUE) {
-            header("Location: /api/emnePage.php/?subject_pin=$subjectPIN");
+            header("Location: /php/emnePage.php/?subject_pin=$subjectPIN");
         } else {
             echo "Error submitting message. Please try again.";
         }
     }
     // Guests & Lecturers are not allowed to make messages. Redirecting back to page.
     else{
-        header("Location: /api/emnePage.php/?subject_pin=$subjectPIN");
+        header("Location: /php/emnePage.php/?subject_pin=$subjectPIN");
     }
 }
 else{
     $subjectPIN = $_POST["subject_pin"];
-    header("Location: /api/emnePage.php/?subject_pin=$subjectPIN");
+    header("Location: /php/emnePage.php/?subject_pin=$subjectPIN");
 }
 
 
