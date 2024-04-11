@@ -51,7 +51,7 @@ if ($_FILES["lecturerImage"]["type"] == 'image/jpeg' || $_FILES["lecturerImage"]
 // Prevent Overwriting
 if (file_exists($target_file)) {
     // Append a unique identifier to the file name
-    $fileName = uniqid() . '_' . $fileName;
+    $fileName = uniqid('', true) . '_' . $fileName;
     // Alternatively, you can reject the upload and display an error message
     // echo "File already exists.";
     // exit; // Stop further processing

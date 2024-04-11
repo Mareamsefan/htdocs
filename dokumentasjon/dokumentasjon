@@ -1,0 +1,43 @@
+_____Who are we?_____
+Joergen Hovet (jorgeho@hiof.no)
+Maream Nabel Sefan (mareamns@hiof.no)
+Mathias Bratz-Queseth (mathibr@hiof.no)
+Yahye Abdi Ahmed (yahyea@hiof.no)
+
+____What technologies were used?_____
+- HTML
+- CSS
+- PHP
+- MYSQL
+- XAMPP
+- MySQL-workbench
+- ChatGPT
+- MS Paint
+- GIT og GITHUB
+
+
+____What we have done (so far)____
+We started working on this project by creating a basic sketch of what 
+the page should look like, including neccessary functionalities, in MS Paint.
+
+Our first step was creating a repository in GitHub, and inviting
+all of our members to it. We then all installed and configured XAMPP
+on our computers, so that we would be able to edit and get instant feedback
+on our changes without the need to upload to the server and having to
+use a VPN to connect to it.
+
+We then went on to create some static HTML and CSS pages without any
+functionality. We created a mysql database in MySQL-workbench with 
+the information we needed for the website to work. This database
+was updated multiple times during the development of the project.
+With the SQL-database in place, we got to working on functionality.
+
+We used chatGPT throughout the project to more efficiently learn
+PHP syntax and discover various useful methods that exist within
+PHP version 8.
+
+We had weekly meetings where we would discuss in person what we 
+thought needed to be done, assign tasks, and help each
+other if we were stuck. We met every tuesday and thursday,
+but also set up a few meetings on other days when
+we felt it was neccessary.

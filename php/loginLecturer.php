@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 function login($mysqli, $userId, $RememberMe) {
     echo "Du er nå logget inn!";
-    $token = uniqid(); 
+    $token = uniqid('', true);
     if ($RememberMe) {
         setcookie("remember_token", $token, time() + 3600*24*7); 
     }
