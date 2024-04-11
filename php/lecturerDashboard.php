@@ -46,6 +46,7 @@
             <header class="main-header">
                 <h2 class="title">Emner</h2>
             </header>
+            <!-- TODO: Add back later? Currently not working...
             <section class="add">
                 <button><a href="/php/registerSubject.php">Legg til emne</a></button>
             </section>
@@ -58,6 +59,7 @@
                     <input type="submit" value="Last opp bilde" name="submit">
                 </form>
             </section>
+            -->
 
             <section class="subjects">
                 <?php
