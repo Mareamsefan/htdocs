@@ -18,10 +18,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     //file validation
     // File Type Validation
-$allowedTypes = array('image/jpeg', 'image/png');
+$allowedTypes = array('image/jpeg', 'image/png', 'image/webp');
 if (!in_array($_FILES["lecturerImage"]["type"], $allowedTypes)) {
     // Invalid file type
-    echo "Invalid file type. Please upload a JPEG or PNG image.";
+    echo "Invalid file type. Not an image file";
     exit; // Stop further processing
 }
 
@@ -38,7 +38,7 @@ $fileName = basename($_FILES["lecturerImage"]["name"]);
 $fileName = preg_replace('/[^a-zA-Z0-9_.-]/', '', $fileName); // Remove any characters except letters, numbers, underscore, dot, and hyphen
 
 // File Content Validation (for images)
-if ($_FILES["lecturerImage"]["type"] == 'image/jpeg' || $_FILES["lecturerImage"]["type"] == 'image/png') {
+if ($_FILES["lecturerImage"]["type"] == 'image/jpeg' || $_FILES["lecturerImage"]["type"] == 'image/png' || $_FILES["lecturerImage"]["type"] == 'image/webp') {
     // Check if the uploaded file is a valid image
     $imageInfo = getimagesize($_FILES["lecturerImage"]["tmp_name"]);
     if ($imageInfo === false) {
