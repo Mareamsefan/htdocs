@@ -18,10 +18,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     //file validation
     // File Type Validation
-$allowedTypes = array('image/jpeg', 'image/png', 'image/gif');
+$allowedTypes = array('image/jpeg', 'image/png');
 if (!in_array($_FILES["lecturerImage"]["type"], $allowedTypes)) {
     // Invalid file type
-    echo "Invalid file type. Please upload a JPEG, PNG, or GIF image.";
+    echo "Invalid file type. Please upload a JPEG or PNG image.";
     exit; // Stop further processing
 }
 
@@ -38,7 +38,7 @@ $fileName = basename($_FILES["lecturerImage"]["name"]);
 $fileName = preg_replace('/[^a-zA-Z0-9_.-]/', '', $fileName); // Remove any characters except letters, numbers, underscore, dot, and hyphen
 
 // File Content Validation (for images)
-if ($_FILES["lecturerImage"]["type"] == 'image/jpeg' || $_FILES["lecturerImage"]["type"] == 'image/png' || $_FILES["lecturerImage"]["type"] == 'image/gif') {
+if ($_FILES["lecturerImage"]["type"] == 'image/jpeg' || $_FILES["lecturerImage"]["type"] == 'image/png') {
     // Check if the uploaded file is a valid image
     $imageInfo = getimagesize($_FILES["lecturerImage"]["tmp_name"]);
     if ($imageInfo === false) {
@@ -59,7 +59,7 @@ if (file_exists($target_file)) {
 //validation ends here
 
     if (move_uploaded_file($_FILES["lecturerImage"]["tmp_name"], $target_file)) {
-        echo "The file " . htmlspecialchars(basename($_FILES["lecturerImage"]["name"])) . " has been uploaded.";
+        echo "The file " . htmlspecialchars(basename($_FILES["lecturerImage"]["name"])) . " has been uploaded."
 
         // Perform database operations
         $sql = "INSERT INTO lecturer(FirstName, LastName, Email, Password, lecturerImage) VALUES('$FirstName', '$LastName', '$Email','$Password', '" . basename($_FILES["lecturerImage"]["name"]) . "')";
