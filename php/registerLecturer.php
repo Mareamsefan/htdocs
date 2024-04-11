@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Email = $_POST["Email"];
     $Password = $_POST["Password"];
     $Salt = "supertrygt salt";
-    $HashedPass = hash('sha256', $Password, $Salt)
+    $HashedPass = password_hash($Password, PASSWORD_DEFAULT);
     $SubjectCode = $_POST["SubjectCode"];
     $SubjectName = $_POST["SubjectName"];
     $SubjectPIN = $_POST["SubjectPIN"];

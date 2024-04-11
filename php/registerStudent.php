@@ -27,7 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $Class = $_POST["Class"];
         $Password = $_POST["Password"];
         $Salt = "supertrygt salt";
-        $HashedPass = hash('sha256', $Password, $Salt)
+        $HashedPass = password_hash($Password, PASSWORD_DEFAULT);
+
     } else {
         // Unsupported content type
         die("Unsupported content type: $content_type");
