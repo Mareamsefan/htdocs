@@ -16,6 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $StudyProgram = $data["StudyProgram"];
         $Class = $data["Class"];
         $Password = $data["Password"];
+
+
     } elseif ($content_type === "application/x-www-form-urlencoded") {
         // Handle form data
         $FirstName = $_POST["FirstName"];
@@ -24,6 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $StudyProgram = $_POST["StudyProgram"];
         $Class = $_POST["Class"];
         $Password = $_POST["Password"];
+        $Salt = "supertrygt salt";
+        $HashedPass = hash('sha256', $Password, $Salt)
     } else {
         // Unsupported content type
         die("Unsupported content type: $content_type");
@@ -36,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Prepare the statement
     if ($stmt = $mysqli->prepare($sql)) {
         // Bind parameters
-        $stmt->bind_param("ssssss", $FirstName, $LastName, $Email, $StudyProgram, $Class, $Password);
+        $stmt->bind_param("ssssss", $FirstName, $LastName, $Email, $StudyProgram, $Class, $HashedPass);
 
         // Execute the statement
         if ($stmt->execute()) {

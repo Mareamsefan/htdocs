@@ -8,6 +8,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $LastName = $_POST["LastName"];
     $Email = $_POST["Email"];
     $Password = $_POST["Password"];
+    $Salt = "supertrygt salt";
+    $HashedPass = hash('sha256', $Password, $Salt)
     $SubjectCode = $_POST["SubjectCode"];
     $SubjectName = $_POST["SubjectName"];
     $SubjectPIN = $_POST["SubjectPIN"];
@@ -67,7 +69,7 @@ if (file_exists($target_file)) {
         // Prepare the statement
         if ($stmt = $mysqli->prepare($sql)) {
             // Bind parameters
-            $stmt->bind_param("sssss", $FirstName, $LastName, $Email, $Password, basename($_FILES["lecturerImage"]["name"]));
+            $stmt->bind_param("sssss", $FirstName, $LastName, $Email, $HashedPass, basename($_FILES["lecturerImage"]["name"]));
 
             // Execute the statement
             if ($stmt->execute()) {
