@@ -5,6 +5,9 @@ $mysqli = require __DIR__ . "/database.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $content_type = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
+    // Initialize variables
+    $FirstName = $LastName = $Email = $StudyProgram = $Class = $Password = "";
+
     if ($content_type === "application/json") {
         // Handle JSON data
         $json_data = file_get_contents("php://input");
@@ -17,7 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $Class = $data["Class"];
         $Password = $data["Password"];
 
-
     } elseif ($content_type === "application/x-www-form-urlencoded") {
         // Handle form data
         $FirstName = $_POST["FirstName"];
@@ -26,31 +28,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $StudyProgram = $_POST["StudyProgram"];
         $Class = $_POST["Class"];
         $Password = $_POST["Password"];
-        $Salt = "supertrygt salt";
-        $HashedPass = password_hash($Password, PASSWORD_DEFAULT);
-
     } else {
         // Unsupported content type
         die("Unsupported content type: $content_type");
     }
 
+    // Hash the password for both content types
+    $HashedPass = password_hash($Password, PASSWORD_DEFAULT);
+
     // Prepare the SQL statement
-    $sql = "INSERT INTO student (FirstName, LastName, Email, StudyProgram, Class, Password)
-            VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO student (FirstName, LastName, Email, StudyProgram, Class, Password) VALUES (?, ?, ?, ?, ?, ?)";
 
-    // Prepare the statement
+    // Prepare and execute the statement with parameter binding
     if ($stmt = $mysqli->prepare($sql)) {
-        // Bind parameters
         $stmt->bind_param("ssssss", $FirstName, $LastName, $Email, $StudyProgram, $Class, $HashedPass);
-
-        // Execute the statement
         if ($stmt->execute()) {
             header("Location: /index.html");
         } else {
-            echo "Error: " . $sql . "<br>" . $mysqli->error;
+            echo "Error: " . $mysqli->error;
         }
-
-        // Close the statement
         $stmt->close();
     } else {
         echo "Error preparing statement: " . $mysqli->error;
@@ -59,5 +55,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Close the MySQL connection
     $mysqli->close();
 }
-
 ?>
