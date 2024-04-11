@@ -15,6 +15,8 @@ if (($_POST["reply"] != null) && ($_POST["message_id"] != null) &&
     $messageID = $_POST["message_id"];
     $subjectPIN = $_POST["subject_pin"];
 
+    $variable = "hello";
+
     // Message from (a) lecturer
     if ($accountType == 2){
         $check = "SELECT * FROM reply WHERE Message_ID = $messageID AND from_teacher = 1";
