@@ -4,24 +4,41 @@ session_start();
 
 // if there is no message, or no subject pin, just return to the previous page.
 if (($_POST["comment"] != null) && ($_POST["subject_pin"] != null)){
-    // Student
+// Student
     $accountType = $_SESSION['account_type'];
     $comment = $_POST["comment"];
     $subjectPIN = $_POST["subject_pin"];
 
-    // Student
+// Student
     if ($accountType == 1) {
         $studentID = $_SESSION["user_id"];
 
+        // Prepare the SQL statement
         $sql = "INSERT INTO message (Message, Student_ID, Reported, subject_SubjectPIN) 
-            VALUES ('$comment', '$studentID', 0, '$subjectPIN')";
+            VALUES (?, ?, 0, ?)";
 
-        if ($mysqli->query($sql) === TRUE) {
-            header("Location: /php/emnePage.php/?subject_pin=$subjectPIN");
+        // Prepare the statement
+        if ($stmt = $mysqli->prepare($sql)) {
+            // Bind parameters
+            $stmt->bind_param("sis", $comment, $studentID, $subjectPIN);
+
+            // Execute the statement
+            if ($stmt->execute()) {
+                // Redirect on success
+                header("Location: /php/emnePage.php/?subject_pin=$subjectPIN");
+            } else {
+                // Error handling
+                echo "Error submitting message. Please try again.";
+            }
+
+            // Close the statement
+            $stmt->close();
         } else {
-            echo "Error submitting message. Please try again.";
+            // Error handling
+            echo "Error preparing statement. Please try again.";
         }
     }
+
     // Guests & Lecturers are not allowed to make messages. Redirecting back to page.
     else{
         header("Location: /php/emnePage.php/?subject_pin=$subjectPIN");

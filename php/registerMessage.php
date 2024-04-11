@@ -15,24 +15,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $userId = $_SESSION['user_id'];
     } elseif ($content_type === "application/x-www-form-urlencoded") {
         // Handle form data
-        $comment = isset($_POST["comment"]) ? $_POST["comment"] : ""; // Fix the typo here
+        $comment = isset($_POST["comment"]) ? $_POST["comment"] : "";
         $userId = $_SESSION['user_id'];
     } else {
         // Unsupported content type
         die("Unsupported content type: $content_type");
     }
 
-    $subject_subjectPin = $_GET["subject_pin"]; // Add a semicolon here
+    $subject_subjectPin = $_GET["subject_pin"];
 
-    // Perform database operations
-    // 1. Legger til riktig data i subject-tabellen
+    // Prepare the SQL statement
     $sql = "INSERT INTO Message (Message, Student_ID, Subject_SubjectPin)
-            VALUES ('$comment', '$userId', 'selsaa')";
-    
-    if ($mysqli->query($sql) === TRUE) {
-        echo "Data lagt til i databasen!";
+            VALUES (?, ?, ?)";
+
+    // Prepare the statement
+    if ($stmt = $mysqli->prepare($sql)) {
+        // Bind parameters
+        $stmt->bind_param("sis", $comment, $userId, $subject_subjectPin);
+
+        // Execute the statement
+        if ($stmt->execute()) {
+            echo "Data lagt til i databasen!";
+        } else {
+            echo "Feil: " . $sql . "<br>" . $mysqli->error;
+        }
+
+        // Close the statement
+        $stmt->close();
     } else {
-        echo "Feil: " . $sql . "<br>" . $mysqli->error;
+        echo "Error preparing statement: " . $mysqli->error;
     }
 
     // Close the MySQL connection

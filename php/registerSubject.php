@@ -27,25 +27,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Unsupported content type: $content_type");
     }
 
-    // Perform database operations
-    // 1. Legger til riktig data i subject-tabellen
-    $sql = "INSERT INTO subject (SubjectCode, SubjectName, SubjectPIN)
-            VALUES ('$SubjectCode', '$SubjectName', '$SubjectPIN')";
-    if ($mysqli->query($sql) === TRUE) {
-        echo "Data lagt til i databasen!";
-    } else {
-        echo "Feil: " . $sql . "<br>" . $mysqli->error;
-    }
+    // Prepare the SQL statement for inserting into the subject table
+    $sql1 = "INSERT INTO subject (SubjectCode, SubjectName, SubjectPIN)
+            VALUES (?, ?, ?)";
 
-    // 2. Legger til riktig data i lecturer_has_subject-tabellen
-    $sql = "INSERT INTO lecturer_has_subject (Lecturer_ID, Subject_SubjectCode)
-            VALUES ('$userId', '$SubjectCode')";
+    // Prepare the statement
+    if ($stmt1 = $mysqli->prepare($sql1)) {
+        // Bind parameters
+        $stmt1->bind_param("sss", $SubjectCode, $SubjectName, $SubjectPIN);
 
-    if ($mysqli->query($sql) === TRUE) {
-        echo "Data lagt til i lecturer_has_subject!";
-        header("Location: /php/lecturerDashboard.php");
+        // Execute the statement for inserting into the subject table
+        if ($stmt1->execute()) {
+            echo "Data lagt til i databasen!";
+
+            // Prepare the SQL statement for inserting into the lecturer_has_subject table
+            $sql2 = "INSERT INTO lecturer_has_subject (Lecturer_ID, Subject_SubjectCode)
+                    VALUES (?, ?)";
+
+            // Prepare the statement
+            if ($stmt2 = $mysqli->prepare($sql2)) {
+                // Bind parameters
+                $stmt2->bind_param("is", $userId, $SubjectCode);
+
+                // Execute the statement for inserting into the lecturer_has_subject table
+                if ($stmt2->execute()) {
+                    echo "Data lagt til i lecturer_has_subject!";
+                    header("Location: /php/lecturerDashboard.php");
+                } else {
+                    echo "Feil: " . $mysqli->error;
+                }
+
+                // Close the statement for lecturer_has_subject
+                $stmt2->close();
+            } else {
+                echo "Feil: " . $mysqli->error;
+            }
+        } else {
+            echo "Feil: " . $mysqli->error;
+        }
+
+        // Close the statement for subject
+        $stmt1->close();
     } else {
-        echo "Feil: : " . $mysqli->error;
+        echo "Feil: " . $mysqli->error;
     }
 
     // Close the MySQL connection

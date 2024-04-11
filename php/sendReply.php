@@ -15,34 +15,44 @@ if (($_POST["reply"] != null) && ($_POST["message_id"] != null) &&
     $messageID = $_POST["message_id"];
     $subjectPIN = $_POST["subject_pin"];
 
-    $variable = "hello";
+    if ($accountType == 2) {
+        // Prepare and execute the SELECT statement to check if a reply from a lecturer already exists
+        $checkSql = "SELECT * FROM reply WHERE Message_ID = ? AND from_teacher = 1";
+        if ($stmt = $mysqli->prepare($checkSql)) {
+            $stmt->bind_param("i", $messageID);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-    // Message from (a) lecturer
-    if ($accountType == 2){
-        $check = "SELECT * FROM reply WHERE Message_ID = $messageID AND from_teacher = 1";
-        $result = $mysqli->query($check);
-
-        // Check if reply from a lecturer already exists
-        if ($result->num_rows == 0){
-            $sql = "INSERT INTO reply (Message, from_teacher, Message_ID) VALUES ('$reply', 1, '$messageID')";
-            if ($mysqli->query($sql) === TRUE) {
-                header("Location: /php/emnePage.php/?subject_pin=$subjectPIN");
+            // Check if reply from a lecturer already exists
+            if ($result->num_rows == 0) {
+                // Prepare and execute the INSERT statement for a reply from a lecturer
+                $insertSql = "INSERT INTO reply (Message, from_teacher, Message_ID) VALUES (?, 1, ?)";
+                if ($stmt = $mysqli->prepare($insertSql)) {
+                    $stmt->bind_param("si", $reply, $messageID);
+                    $stmt->execute();
+                    header("Location: /php/emnePage.php/?subject_pin=$subjectPIN");
+                } else {
+                    echo "Error preparing statement. Please try again.";
+                }
             } else {
-                echo "Error submitting message. Please try again.";
+                // Redirect if a reply from a lecturer already exists
+                header("Location: /php/emnePage.php/?subject_pin=$subjectPIN");
             }
+
+            // Close the statement
+            $stmt->close();
+        } else {
+            echo "Error preparing statement. Please try again.";
         }
-        else{
-            header("Location: /php/emnePage.php/?subject_pin=$subjectPIN");
-        }
-    }
-    // Message from Guest
-    else{
-        $sql = "INSERT INTO reply (Message, from_teacher, Message_ID) 
-            VALUES ('$reply', 0, '$messageID')";
-        if ($mysqli->query($sql) === TRUE) {
+    } else {
+        // Prepare and execute the INSERT statement for a reply from a guest
+        $sql = "INSERT INTO reply (Message, from_teacher, Message_ID) VALUES (?, 0, ?)";
+        if ($stmt = $mysqli->prepare($sql)) {
+            $stmt->bind_param("si", $reply, $messageID);
+            $stmt->execute();
             header("Location: /php/emnePage.php/?subject_pin=$subjectPIN");
         } else {
-            echo "Error submitting message. Please try again.";
+            echo "Error preparing statement. Please try again.";
         }
     }
 }

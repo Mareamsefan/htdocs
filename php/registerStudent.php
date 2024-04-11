@@ -29,14 +29,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Unsupported content type: $content_type");
     }
 
-    // Perform database operations
+    // Prepare the SQL statement
     $sql = "INSERT INTO student (FirstName, LastName, Email, StudyProgram, Class, Password)
-            VALUES ('$FirstName', '$LastName', '$Email', '$StudyProgram', '$Class', '$Password')";
+            VALUES (?, ?, ?, ?, ?, ?)";
 
-    if ($mysqli->query($sql) === TRUE) {
-        header("Location: /index.html");
+    // Prepare the statement
+    if ($stmt = $mysqli->prepare($sql)) {
+        // Bind parameters
+        $stmt->bind_param("ssssss", $FirstName, $LastName, $Email, $StudyProgram, $Class, $Password);
+
+        // Execute the statement
+        if ($stmt->execute()) {
+            header("Location: /index.html");
+        } else {
+            echo "Error: " . $sql . "<br>" . $mysqli->error;
+        }
+
+        // Close the statement
+        $stmt->close();
     } else {
-        echo "Feil: " . $sql . "<br>" . $mysqli->error;
+        echo "Error preparing statement: " . $mysqli->error;
     }
 
     // Close the MySQL connection
