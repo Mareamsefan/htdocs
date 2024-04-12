@@ -36,7 +36,7 @@
                 echo "<h1>Dashboard til $LecturerFirstName $LecturerLastName</h1>";
                 ?>
                 <ul class="Liste">
-                    <li><a href="../../index.html">Logg ut</a></li>
+                    <li><a href="logout.php">Logg ut</a></li>
                     <li><a href="lecturerMinProfil.php">Min profil</a></li>
                 </ul>
             </nav>
