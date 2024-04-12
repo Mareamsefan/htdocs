@@ -5,47 +5,67 @@ $mysqli = require __DIR__ . "/database.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Email = $_POST["Email"];
     $Password = $_POST["Password"];
-    $RememberMe = isset($_POST["RememberMe"]);
+    $RememberMe = isset($_POST["RememberMe"]); 
 
-    // Check the permanent password
-    $stmt = $mysqli->prepare("SELECT ID, Password FROM student WHERE Email = ?");
-    $stmt->bind_param("s", $Email);
+    // Check if it's a temporary password
+    $sql_check_temp_password = "SELECT ID, password_timestamp FROM student WHERE Email = ? AND temp_password = ?";
+    $stmt = $mysqli->prepare($sql_check_temp_password);
+    $stmt->bind_param("ss", $Email, $Password);
     $stmt->execute();
-    $result = $stmt->get_result();
-    if ($row = $result->fetch_assoc()) {
-        if (password_verify($Password, $row['Password'])) {
-            // Password is correct
-            login($mysqli, $row['ID'], $RememberMe);
-        } else {
-            // Password is incorrect
-            echo "Feil, sjekk at passord og e-post er riktig.";
-        }
+    $result_check_temp_password = $stmt->get_result();
+    $row_check_temp_password = $result_check_temp_password->fetch_assoc();
+
+    if ($row_check_temp_password && strtotime($row_check_temp_password['password_timestamp']) > strtotime("-15 minutes")) {
+        // If the temporary password exists and is within the validity period
+        $userId = $row_check_temp_password['ID'];
+
+        // Delete the temporary password
+        $sql_delete_temp_password = "UPDATE student SET temp_password = NULL WHERE ID = ?";
+        $stmt = $mysqli->prepare($sql_delete_temp_password);
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+
+        // Log in the user
+        login($mysqli, $userId, $RememberMe);
     } else {
-        // User does not exist
-        echo "Feil ved pålogging. Vennligst prøv igjen.";
+        // If the temporary password does not exist or has expired, check the permanent password
+        $sql = "SELECT COUNT(*) AS count_exists, ID FROM student WHERE Email = ?";
+        $stmt = $mysqli->prepare($sql);
+        $stmt->bind_param("s", $Email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result && $result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            $userId = $row['ID'];
+            if ($row['count_exists'] == 1) {
+                // Log in the user
+                login($mysqli, $userId, $RememberMe);
+            } else {
+                echo "Feil, sjekk at passord og e-post er riktig.";
+            } 
+        } else {
+            echo "Feil ved pålogging. Vennligst prøv igjen.";
+        }
     }
     // Close the connection
-    $stmt->close();
     $mysqli->close();
 }
 
 function login($mysqli, $userId, $RememberMe) {
     echo "Du er nå logget inn!";
-    $token = uniqid('', true); // Generating a unique token for "Remember Me" functionality
+    $token = uniqid(); 
     if ($RememberMe) {
-        setcookie("remember_token", $token, time() + 3600*24*7, "/"); // Setting a cookie with a 1-week expiration
+        setcookie("remember_token", $token, time() + 3600*24*7); 
     }
-    // Updating the remember_token in the database
-    $stmt = $mysqli->prepare("UPDATE student SET remember_token = ? WHERE ID = ?");
+    $sql = "UPDATE student SET remember_token = ? WHERE ID = ?"; 
+    $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("si", $token, $userId);
     $stmt->execute();
-    $stmt->close();
 
-    // Setting session variables
     $_SESSION['user_id'] = $userId;
-    $_SESSION['account_type'] = 1; // Assuming 1 = user is a student
+    $_SESSION['account_type'] = 1; // 1 = user is a student
 
-    // Redirecting to the student dashboard
     header("Location: /php/studentDashboard.php");
     exit();
 }
