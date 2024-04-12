@@ -5,9 +5,12 @@ $mysqli = require __DIR__ . "/database.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $content_type = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
+    // Initialize variables
+    $FirstName = $LastName = $Email = $StudyProgram = $Class = $Password = "";
+
     if ($content_type === "application/json") {
         // Handle JSON data
-        $json_data = file_get_contents("api://input");
+        $json_data = file_get_contents("php://input");
         $data = json_decode($json_data, true);
 
         $FirstName = $data["FirstName"];
@@ -16,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $StudyProgram = $data["StudyProgram"];
         $Class = $data["Class"];
         $Password = $data["Password"];
+
     } elseif ($content_type === "application/x-www-form-urlencoded") {
         // Handle form data
         $FirstName = $_POST["FirstName"];
@@ -29,18 +33,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Unsupported content type: $content_type");
     }
 
-    // Perform database operations
-    $sql = "INSERT INTO student (FirstName, LastName, Email, StudyProgram, Class, Password)
-            VALUES ('$FirstName', '$LastName', '$Email', '$StudyProgram', '$Class', '$Password')";
+    // Hash the password for both content types
+    $HashedPass = password_hash($Password, PASSWORD_DEFAULT);
 
-    if ($mysqli->query($sql) === TRUE) {
-        header("Location: /index.html");
+    // Prepare the SQL statement
+    $sql = "INSERT INTO student (FirstName, LastName, Email, StudyProgram, Class, Password) VALUES (?, ?, ?, ?, ?, ?)";
+
+    // Prepare and execute the statement with parameter binding
+    if ($stmt = $mysqli->prepare($sql)) {
+        $stmt->bind_param("ssssss", $FirstName, $LastName, $Email, $StudyProgram, $Class, $HashedPass);
+        if ($stmt->execute()) {
+            header("Location: /index.html");
+        } else {
+            echo "Error: " . $mysqli->error;
+        }
+        $stmt->close();
     } else {
-        echo "Feil: " . $sql . "<br>" . $mysqli->error;
+        echo "Error preparing statement: " . $mysqli->error;
     }
 
     // Close the MySQL connection
     $mysqli->close();
 }
-
 ?>

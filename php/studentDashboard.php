@@ -23,7 +23,7 @@
                 header("Location: /index.html");
             }
 
-            $mysqli = require __DIR__ . "/../api/database.php";
+            $mysqli = require __DIR__ . "/../php/database.php";
             $sql = "SELECT FirstName, LastName FROM student WHERE ID = '$userId'";
             $result = $mysqli->query($sql);
             $row = $result->fetch_assoc();
@@ -46,7 +46,7 @@
 
         <section class="subjects">
             <?php
-            $mysqli = require __DIR__ . "/../api/database.php";
+            $mysqli = require __DIR__ . "/../php/database.php";
             $sql = "SELECT DISTINCT s.* FROM subject AS s";
             $result = $mysqli->query($sql);
 
@@ -57,7 +57,7 @@
                     echo "<header class='subject-header'>";
                     echo "<h3>" . $row['SubjectName'] . "</h3>";
                     echo "</header>";
-                    echo "<button><a href='../../api/emnePage.php/?subject_pin={$row['SubjectPIN']}'>Besøk emneside</a></button>";
+                    echo "<button><a href='../../php/emnePage.php/?subject_pin={$row['SubjectPIN']}'>Besøk emneside</a></button>";
                     echo "</article>";
                 }
             } else {

@@ -27,7 +27,7 @@
                 }
 
                 // testing
-                $mysqli = require __DIR__ . "/../api/database.php";
+                $mysqli = require __DIR__ . "/../php/database.php";
                 $sql = "SELECT FirstName, LastName FROM lecturer WHERE ID = '$userId'";
                 $result = $mysqli->query($sql);
                 $row = $result->fetch_assoc();
@@ -46,18 +46,20 @@
             <header class="main-header">
                 <h2 class="title">Emner</h2>
             </header>
+            <!-- TODO: Add back later? Currently not working...
             <section class="add">
-                <button><a href="/api/registerSubject.php">Legg til emne</a></button>
+                <button><a href="/php/registerSubject.php">Legg til emne</a></button>
             </section>
 
             <section class="upload">
                 <h2>Last opp bilde</h2>
-                <form action="/api/imgUpload.php" method="post" enctype="multipart/form-data">
+                <form action="/php/imgUpload.php" method="post" enctype="multipart/form-data">
                     Velg bilde for opplasting:
                     <input type="file" name="lecturerImage" id="lecturerImage">
                     <input type="submit" value="Last opp bilde" name="submit">
                 </form>
             </section>
+            -->
 
             <section class="subjects">
                 <?php
@@ -81,7 +83,7 @@
                         echo "<header class='subject-header'>";
                         echo "<h3>" . $row['SubjectName'] . "</h3>";
                         echo "</header>";
-                        echo "<button><a href='../../api/emnePage.php/?subject_pin={$row['SubjectPIN']}'>Besøk emneside</a></button>";
+                        echo "<button><a href='../../php/emnePage.php/?subject_pin={$row['SubjectPIN']}'>Besøk emneside</a></button>";
                         echo "</article>";
                     }
                 } else {
