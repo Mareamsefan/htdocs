@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $SubjectPIN = $_POST["SubjectPIN"];
 
     // File upload
-    $target_dir = "../../imges/";
+    $target_dir = "../img/";
     $target_file = $target_dir . basename($_FILES["lecturerImage"]["name"]);
 
     //file validation
