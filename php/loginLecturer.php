@@ -7,36 +7,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Password = $_POST["Password"];
     $RememberMe = isset($_POST["RememberMe"]); 
 
-    // Sjekk om det er et midlertidig passord
-    $sql_check_temp_password = "SELECT ID, password_timestamp FROM lecturer WHERE Email = '$Email' AND temp_password = '$Password'";
-    $result_check_temp_password = $mysqli->query($sql_check_temp_password);
+    // Check if it's a temporary password
+    $sql_check_temp_password = "SELECT ID, password_timestamp FROM lecturer WHERE Email = ? AND temp_password = ?";
+    $stmt = $mysqli->prepare($sql_check_temp_password);
+    $stmt->bind_param("ss", $Email, $Password);
+    $stmt->execute();
+    $result_check_temp_password = $stmt->get_result();
     $row_check_temp_password = $result_check_temp_password->fetch_assoc();
 
     if ($row_check_temp_password && strtotime($row_check_temp_password['password_timestamp']) > strtotime("-15 minutes")) {
-        // Hvis det midlertidige passordet eksisterer og er innenfor gyldighetsperioden
+        // If the temporary password exists and is within the validity period
         $userId = $row_check_temp_password['ID'];
 
-        // Slett det midlertidige passordet
-        $sql_delete_temp_password = "UPDATE lecturer SET temp_password = NULL WHERE ID = $userId";
-        $mysqli->query($sql_delete_temp_password);
+        // Delete the temporary password
+        $sql_delete_temp_password = "UPDATE lecturer SET temp_password = NULL WHERE ID = ?";
+        $stmt = $mysqli->prepare($sql_delete_temp_password);
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
 
-        // Logg inn brukeren
+        // Log in the user
         login($mysqli, $userId, $RememberMe);
     } else {
-        // Hvis det midlertidige passordet ikke eksisterer eller er utløpt, sjekk det permanente passordet
-        $sql = "SELECT COUNT(*) AS count_exists, ID FROM lecturer WHERE Email = '$Email' AND Password = '$Password' GROUP BY ID";
-        $result = $mysqli->query($sql);
+        // If the temporary password does not exist or has expired, check the permanent password
+        $sql = "SELECT ID, Password FROM lecturer WHERE Email = ?";
+        $stmt = $mysqli->prepare($sql);
+        $stmt->bind_param("s", $Email);
+        $stmt->execute();
+        $result = $stmt->get_result();
         
-        if ($result) {
+        if ($result && $result->num_rows == 1) {
             $row = $result->fetch_assoc();
-            if($row){
-                $count_exists = $row['count_exists'];
-                $userId = $row['ID'];
-                if ($count_exists == 1) {
-                // Logg inn brukeren
+            $userId = $row['ID'];
+            $storedPassword = $row['Password'];
+            if(password_verify($Password, $storedPassword)){
+                // Log in the user
                 login($mysqli, $userId, $RememberMe);
-                } 
-
             } else {
                 echo "Feil, sjekk at passord og e-post er riktig.";
             } 
@@ -47,14 +52,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Close the connection
     $mysqli->close();
 }
+
 function login($mysqli, $userId, $RememberMe) {
     echo "Du er nå logget inn!";
     $token = uniqid('', true);
     if ($RememberMe) {
         setcookie("remember_token", $token, time() + 3600*24*7); 
     }
-    $sql = "UPDATE lecturer SET remember_token = '$token' WHERE ID = $userId"; 
-    mysqli_query($mysqli, $sql); 
+    $sql = "UPDATE lecturer SET remember_token = ? WHERE ID = ?"; 
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("si", $token, $userId);
+    $stmt->execute();
 
     $_SESSION['user_id'] = $userId;
     $_SESSION['account_type'] = 2; // 2 = user is a lecturer
