@@ -2,52 +2,56 @@
 $mysqli = require __DIR__ . "/database.php";
 session_start();
 
-// if there is no message, or no subject pin, just return to the previous page.
-if (($_POST["comment"] != null) && ($_POST["subject_pin"] != null)){
-// Student
-    $accountType = $_SESSION['account_type'];
-    $comment = $_POST["comment"];
-    $subjectPIN = $_POST["subject_pin"];
+// Function to remove PHP code using regular expressions
+function remove_php_tags($comment) {
+    // Remove PHP code from the comment
+    $comment = preg_replace('/<\?(=|php)?.*?\?>/si', '', $comment);
+    return $comment;
+}
 
-// Student
+// Function to remove JavaScript code
+function remove_js_code($comment) {
+    // Remove JavaScript code from the comment
+    $comment = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $comment);
+    return $comment;
+}
+
+// if there is no message, or no subject pin, just return to the previous page.
+if (isset($_POST["comment"]) && isset($_POST["subject_pin"])) {
+    $comment = $_POST["comment"];
+    // Remove PHP code from the comment
+    $comment = remove_php_tags($comment);
+    // Remove JavaScript code from the comment
+    $comment = remove_js_code($comment);
+    // Remove HTML tags and escape special characters
+    $comment = htmlspecialchars(strip_tags($comment));
+    $subjectPIN = $_POST["subject_pin"];
+    $accountType = $_SESSION['account_type'];
+
     if ($accountType == 1) {
         $studentID = $_SESSION["user_id"];
-
-        // Prepare the SQL statement
         $sql = "INSERT INTO message (Message, Student_ID, Reported, subject_SubjectPIN) 
-            VALUES (?, ?, 0, ?)";
+                VALUES (?, ?, 0, ?)";
 
-        // Prepare the statement
         if ($stmt = $mysqli->prepare($sql)) {
-            // Bind parameters
             $stmt->bind_param("sis", $comment, $studentID, $subjectPIN);
-
-            // Execute the statement
             if ($stmt->execute()) {
-                // Redirect on success
                 header("Location: /php/emnePage.php/?subject_pin=$subjectPIN");
             } else {
-                // Error handling
                 echo "Error submitting message. Please try again.";
             }
-
-            // Close the statement
             $stmt->close();
         } else {
-            // Error handling
             echo "Error preparing statement. Please try again.";
         }
-    }
-
-    // Guests & Lecturers are not allowed to make messages. Redirecting back to page.
-    else{
+    } else {
         header("Location: /php/emnePage.php/?subject_pin=$subjectPIN");
     }
-}
-else{
+} else {
     $subjectPIN = $_POST["subject_pin"];
     header("Location: /php/emnePage.php/?subject_pin=$subjectPIN");
 }
+
 
 
 /* HOW TO INCORPORATE MESSAGES
