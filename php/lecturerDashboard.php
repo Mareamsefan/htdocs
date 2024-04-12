@@ -19,11 +19,9 @@
                 session_start();
                 // Check if user ID is set in the session
                 if (isset($_SESSION['user_id'])) {
-                    // Retrieve user ID
                     $userId = $_SESSION['user_id'];
-                    // echo "User ID: " . $userId;
                 } else {
-                    echo "User ID not found in session.";
+                     header("Location: /index.html");
                 }
 
                 // testing

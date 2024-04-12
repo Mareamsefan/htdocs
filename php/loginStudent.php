@@ -5,7 +5,7 @@ $mysqli = require __DIR__ . "/database.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Email = $_POST["Email"];
     $Password = $_POST["Password"];
-    $RememberMe = isset($_POST["RememberMe"]); 
+    $RememberMe = isset($_POST["RememberMe"]);
 
     // Check if it's a temporary password
     $sql_check_temp_password = "SELECT ID, password_timestamp FROM student WHERE Email = ? AND temp_password = ?";
@@ -29,12 +29,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         login($mysqli, $userId, $RememberMe);
     } else {
         // If the temporary password does not exist or has expired, check the permanent password
-        $sql = "SELECT COUNT(*) AS count_exists, ID FROM student WHERE Email = ?";
+        $sql = "SELECT ID, COUNT(*) AS count_exists FROM student WHERE Email = ? GROUP BY ID";
         $stmt = $mysqli->prepare($sql);
         $stmt->bind_param("s", $Email);
         $stmt->execute();
         $result = $stmt->get_result();
-        
+
         if ($result && $result->num_rows == 1) {
             $row = $result->fetch_assoc();
             $userId = $row['ID'];
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 login($mysqli, $userId, $RememberMe);
             } else {
                 echo "Feil, sjekk at passord og e-post er riktig.";
-            } 
+            }
         } else {
             echo "Feil ved pålogging. Vennligst prøv igjen.";
         }
@@ -54,11 +54,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 function login($mysqli, $userId, $RememberMe) {
     echo "Du er nå logget inn!";
-    $token = uniqid(); 
+    $token = uniqid();
     if ($RememberMe) {
-        setcookie("remember_token", $token, time() + 3600*24*7); 
+        setcookie("remember_token", $token, time() + 3600*24*7);
     }
-    $sql = "UPDATE student SET remember_token = ? WHERE ID = ?"; 
+    $sql = "UPDATE student SET remember_token = ? WHERE ID = ?";
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("si", $token, $userId);
     $stmt->execute();

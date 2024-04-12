@@ -20,8 +20,10 @@
             if (isset($_SESSION['user_id'])) {
                 $userId = $_SESSION['user_id'];
             } else {
-                header("Location: /index.html");
+                 header("Location: /index.html");
             }
+
+
 
             $mysqli = require __DIR__ . "/../php/database.php";
             $sql = "SELECT FirstName, LastName FROM student WHERE ID = '$userId'";
