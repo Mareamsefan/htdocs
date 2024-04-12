@@ -33,7 +33,7 @@
 
             ?>
             <ul class="Liste">
-                <li><a href="../../index.html">Logg ut</a></li>
+                <li><a href="logout.php">Logg ut</a></li>
                 <li><a href="studentMinProfil.php">Min profil</a></li>
             </ul>
         </nav>

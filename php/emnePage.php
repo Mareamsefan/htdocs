@@ -37,7 +37,12 @@ $row = $result->fetch_assoc();
         $mysqli->close();
         ?>
         <ul>
-          <li><a href="../../index.html">Hjem</a></li>
+            <?php
+                if (isset($_SESSION['account_type'])){
+                    echo '<li><a href="../logout.php">Logg ut</a></li>';
+            }
+            ?>
+            <li><a href="../../index.html">Hjem</a></li>
         </ul>
       </nav>
     </header>

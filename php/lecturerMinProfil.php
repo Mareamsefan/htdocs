@@ -17,41 +17,56 @@
         session_start();
         // Check if user ID is set in the session
         if (isset($_SESSION['user_id'])) {
-        // Retrieve user ID
+            // Retrieve user ID
             $userId = $_SESSION['user_id'];
-        // echo "User ID: " . $userId;
         } else {
             echo "User ID not found in session.";
         }
 
-        // testing
+        // Connect to database
         $mysqli = require __DIR__ . "/../php/database.php";
-        $sql = "SELECT FirstName, LastName, Email, password FROM lecturer WHERE ID = '$userId'";
-        $result = $mysqli->query($sql);
+
+        // Retrieve user information
+        $sql = "SELECT FirstName, LastName, Email FROM lecturer WHERE ID = ?";
+        $stmt = $mysqli->prepare($sql);
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+        $result = $stmt->get_result();
         $row = $result->fetch_assoc();
         $LecturerEmail = $row['Email'];
-        $Lecturerpassword = $row['password'];
         $LecturerFirstName = $row['FirstName']; 
         $LecturerLastName = $row['LastName'];
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Hvis skjemaet er sendt, oppdater brukerprofilen
+            // If the form is submitted, update the user profile
+            $firstName = $_POST['FirstName'];
+            $lastName = $_POST['LastName'];
             $email = $_POST['Email'];
-            $password = $_POST['password'];
-                    
-        // Forbered en SQL-setning for oppdatering av brukeren
-            $sql = "UPDATE Lecturer SET Email='$email', password='$password' WHERE ID='$userId'";
-                    
-            // Utfør spørringen
-            if ($mysqli->query($sql) === TRUE) {
-                echo "Brukerinformasjon oppdatert.";
-            } else {
-                    echo "Feil ved oppdatering av brukerinformasjon: " . $mysqli->error;
-                }
-            }
-            ?>
 
-            <form id="register" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            // Prepare SQL statement for updating the user
+            $sql = "UPDATE lecturer SET FirstName=?, LastName=?, Email=? WHERE ID=?";
+            $stmt = $mysqli->prepare($sql);
+            $stmt->bind_param("sssi", $firstName, $lastName, $email, $userId);
+
+            // Execute the query
+            if ($stmt->execute()) {
+                echo "Brukerinformasjon oppdatert.";
+
+                // Check if password field is not empty, then update password
+                if(!empty($_POST['password'])) {
+                    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                    $sql_update_password = "UPDATE lecturer SET password=? WHERE ID=?";
+                    $stmt_password = $mysqli->prepare($sql_update_password);
+                    $stmt_password->bind_param("si", $password, $userId);
+                    $stmt_password->execute();
+                }
+            } else {
+                echo "Feil ved oppdatering av brukerinformasjon: " . $mysqli->error;
+            }
+        }
+        ?>
+
+        <form id="register" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <label for="FirstName">Fornavn: </label>
             <input type="text" name="FirstName" value="<?php echo $LecturerFirstName ?>">
                 
@@ -62,8 +77,8 @@
             <input type="text" name="Email" value="<?php echo $LecturerEmail ?>">
                 
             <label for="password">Passord: </label>
-            <input type="text" name="password" value="<?php echo $Lecturerpassword ?>">
-                
+            <input type="password" name="password" placeholder="Oppgi nytt passord">
+
             <button type="submit">Oppdater</button>
             
         </form>
